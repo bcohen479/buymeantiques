@@ -8,7 +8,8 @@
 </head>
 <body>
 <p> 
-Welcome <%=session.getAttribute("userName")%>  
+Welcome <%=session.getAttribute("userName")%> 
+<a href="liveauctions.jsp">Live Auctions</a> 
 <a href="logout.jsp">Log out</a>
 </p>
 </body>
