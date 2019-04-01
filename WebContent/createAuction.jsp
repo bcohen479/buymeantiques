@@ -37,6 +37,7 @@
 			
 			//Auction details
 			String aucDate = request.getParameter("auc_end");
+			String aucName = request.getParameter("auc_title");
 /* 			java.util.Date date = new java.text.SimpleDateFormat("dd/MM/yyyy").parse(aucDate);
  */			Double startingPrice = Double.parseDouble(request.getParameter("auc_startingPrice"));
 			Double reservePrice = Double.parseDouble(request.getParameter("auc_reserve"));
@@ -93,8 +94,8 @@
 			ps2.close();
 			System.out.println("Item tables updated");
 			
-			String makeAuction = "INSERT INTO Live_Auction(auction_ID, item_ID, current_price, end_date, seller, min_price)"
-					+ "VALUES (?, ?, ?, ?, ?, ?)";
+			String makeAuction = "INSERT INTO Live_Auction(auction_ID, item_ID, current_price, end_date, seller, min_price, title)"
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement aucPs = con.prepareStatement(makeAuction);
 			aucPs.setInt(1, aucId);
 			aucPs.setInt(2, itemId);
@@ -102,6 +103,7 @@
 			aucPs.setDate(4, java.sql.Date.valueOf(aucDate));
 			aucPs.setInt(5, user);
 			aucPs.setDouble(6, reservePrice);
+			aucPs.setString(7, aucName);
 			
  			try{
 				aucPs.executeUpdate();
