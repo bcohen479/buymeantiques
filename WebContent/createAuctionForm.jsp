@@ -23,12 +23,15 @@ Add Auction details...
 	<tr>
 		<td>Item Type</td>
 		<td>
-			<input list="Item_Types" name="itemType">
+<!-- 			<input list="Item_Types" name="itemType">
 			  <datalist id="types">
 			    <option value="Chair">
 			    <option value="Jewelry">
 			    <option value="Table">
-			  </datalist>
+			  </datalist> -->
+			  <input type="radio" name="itemType" value="Chairs" checked>Chair<br>
+			  <input type="radio" name="itemType" value="Tables">Table<br>
+			  <input type="radio" name="itemType" value="Jewelry">Jewelry<br>
 		</td>
 	<tr>
 		<td>Item Name</td><td><input type="text" name="itemName"></td>
@@ -48,7 +51,7 @@ Add Auction details...
 		<td>End Date</td><td><input type="datetime-local" name="auc_end" required></td>
 	</tr>
 	<tr>
-		<td>Set Starting Price</td><td><input type="number" name="auc_startingPrice" value = "0.00" required></td>
+		<td>Set Starting Price</td><td><input type="number" name="auc_startingPrice" value = "0.00" step="any" required></td>
 	</tr>
 	<tr>
 		<td>Set Target Minimum Price (Hidden)</td><td><input type="number" name="auc_reserve" value = "0.00"></td>
@@ -61,7 +64,6 @@ Add Auction details...
 	<input type="submit" value="Create Auction">
 </form>
 <br>
-Don't have an account? <a href="index.jsp">Sign Up</a>
 
 </body>
 </html>
