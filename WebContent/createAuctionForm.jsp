@@ -9,13 +9,34 @@
 <title>Create Auction | BuyMeAntiques</title>
 </head>
 <body>
+<script type="text/javascript">
+
+function typeCheck() {
+    if (document.getElementById('jewl').checked) {
+        document.getElementById('ifJewelry').style.display = 'block';
+        document.getElementById('ifTable').style.display = 'none';
+    	document.getElementById('ifChair').style.display = 'none';
+    }else if(document.getElementById('table').checked){
+    	document.getElementById('ifTable').style.display = 'block';
+    	document.getElementById('ifJewelry').style.display = 'none';
+    	document.getElementById('ifChair').style.display = 'none';
+    }
+    else if(document.getElementById('chair').checked){
+    	document.getElementById('ifJewelry').style.display = 'none';
+    	document.getElementById('ifTable').style.display = 'none';
+    	document.getElementById('ifChair').style.display = 'block';
+    }
+
+}
+
+</script>
 Add Auction details...
 <br>
 
 <form method="post" action="createAuction.jsp">
 	<table>
 	<tr>    
-		<td>Auction title</td><td><input type="text" name="auc_title" required></td>
+		<td>Auction title</td><td><input type="text" maxlength="45" name="auc_title" required></td>
 	</tr>
 	<tr>
 		<td>Set Item Details</td>
@@ -29,13 +50,21 @@ Add Auction details...
 			    <option value="Jewelry">
 			    <option value="Table">
 			  </datalist> -->
-			  <input type="radio" name="itemType" value="Chairs" checked>Chair<br>
-			  <input type="radio" name="itemType" value="Tables">Table<br>
-			  <input type="radio" name="itemType" value="Jewelry">Jewelry<br>
+			  <input type="radio" onclick="javascript:typeCheck();" name="itemType" value="Chairs" id="chair">Chair<br>
+			  <input type="radio" onclick="javascript:typeCheck();" name="itemType" value="Tables" id="table">Table<br>
+			  <input type="radio" onclick="javascript:typeCheck();" name="itemType" value="Jewelry" id="jewl" >Jewelry<br>
 		</td>
 	<tr>
 		<td>Item Name</td><td><input type="text" name="itemName"></td>
 	</tr>
+	<tr id="ifJewelry" style="display: none" >
+		<td>Weight(g): </td>	<td><input type="text" name="jewlWeight"></td>
+	</tr>
+	<tr id="ifChair" style="display: none">
+		<td>Height(ft): </td>	<td><input type="text" name="chairHeight"></td>
+	</tr>
+	<tr id="ifTable" style="display: none">
+		<td>Dimensions(ft x ft x ft): </td>	<td><input type="text" name="tableDim"></td>
 	</tr>
 	<tr>
 		<td>Manufacturer</td><td><input type="text" name="itemManufacturer"></td>
