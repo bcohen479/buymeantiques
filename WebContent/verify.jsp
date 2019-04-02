@@ -32,7 +32,10 @@
 			if(pw.equals(password)){
 				session.setAttribute("userID", id);
 				session.setAttribute("userName", username);
-			    response.sendRedirect(response.encodeURL("success.jsp"));
+			    response.sendRedirect(response.encodeURL("homepage.jsp"));
+			}else{
+				out.print("WRONG EMAIL OR PASSWORD");
+				%><a href="login.jsp">Return to login page</a><%
 			}
 		}
 	}catch (Exception e) {

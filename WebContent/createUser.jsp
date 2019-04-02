@@ -67,10 +67,10 @@
 				    session.setAttribute("userID", id);
 					session.setAttribute("userName", username);
 				    response.sendRedirect(response.encodeURL("success.jsp"));}
-				    catch(SQLException ex){
+				catch(SQLException ex){
 				    	
 				    	
-				    }
+				}
 				//Close the connection. Don't forget to do it, otherwise you're keeping the resources of the server allocated.
 				con.close();
 				ps.close();
