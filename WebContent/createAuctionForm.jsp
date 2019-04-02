@@ -87,7 +87,7 @@ Add Auction details...
 	</tr>
 	<tr>
 		<td>Auction Description:</td>
-		<td> <textarea name="description" rows="10" cols="30">...</textarea>
+		<td> <textarea name="description" maxlength="500" rows="10" cols="30">...</textarea>
 	</tr>
 	</table>
 	<input type="submit" value="Create Auction">
