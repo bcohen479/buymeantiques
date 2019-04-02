@@ -62,12 +62,13 @@
 			seller = resu.getString("user_name");
 		}
 		System.out.println(seller); 
+		int aucID = res.getInt("auction_ID");
 		String title = res.getString("title");
 		String date = res.getDate("end_date").toString();
 		int price = res.getInt("current_price");
 		%>
 		<tr>
-		<td><a href="#"><%=title %></td></a>
+		<td><a href="aucprofile.jsp?value=<%=aucID%>&val2=<%=seller%>"><%=title%><% System.out.println(seller); %></td></a>
 		<td><%=date %></td>
 		<td><%=price %></td>
 		<td><%=seller %></td>

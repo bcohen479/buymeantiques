@@ -16,8 +16,43 @@ This page shows the history of bids for any auction.
 </head>
 <body>
 
-<table>
-<tr><td><a href="liveauctions.jsp">Back to All Live Auctions</a></td></tr>
+<table cellspacing="5">
+
+<%
+	List<String> auction = new ArrayList<String>();
+	
+	try{
+		ApplicationDB db = new ApplicationDB();	
+		Connection con = db.getConnection();
+		
+		String aucID = request.getParameter("value");
+		if(aucID != null){
+			System.out.println("id: "+aucID);
+			String seller = request.getParameter("val2");
+			System.out.println(seller);
+			String aucQuery = "SELECT * FROM Live_Auction WHERE auction_ID='"+aucID+"';";
+			Statement statement = con.createStatement();
+			ResultSet rs = statement.executeQuery(aucQuery);
+			while(rs.next()){
+				%>
+				<tr><h3><%=rs.getString("title")%></h3></tr>
+				<br>
+				<br>
+				<tr><a href="placebid.jsp"><h5>PLACE BID</h5></a>
+				<tr><td>Seller: <%=seller%></td></tr>
+				<tr><td>Current Price: <%rs.getDouble("current_price"); %></td></tr>
+				<tr><td>End Date: <%=rs.getDate("end_date").toString()%></td></tr>
+				
+			<%
+			}
+			statement.close();
+			rs.close();
+		}
+	}catch (Exception e) {
+		out.print("Error: "+ e);
+	}
+%>
+
 <tr><td>Auction History</td></tr>
 <tr>
 <td>Bidder</td>
@@ -43,6 +78,7 @@ This page shows the history of bids for any auction.
 	<%
 	}
 	%>
+	<tr><td><a href="liveauctions.jsp">Back to All Live Auctions</a></td></tr>
 	</table>
 	<%res.close();
 	stmt.close();
