@@ -1,3 +1,5 @@
+<%/* This allows to users to search for all items of a particular manufacturer.
+*/ %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <!--Import some libraries that have classes that we need -->

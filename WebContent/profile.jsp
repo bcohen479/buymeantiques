@@ -1,3 +1,6 @@
+<%
+/* This allows a user to see another users bidding history. */
+%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <!--Import some libraries that have classes that we need -->
@@ -12,6 +15,7 @@
 <body>
 
 <table>
+<tr><td><a href="liveauctions.jsp">Back to All Live Auctions</a></td></tr>
 <tr><td>Previous Auction Participation</td></tr>
 <tr>
 <td>Auction ID</td>

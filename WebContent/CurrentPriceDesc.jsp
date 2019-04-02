@@ -1,3 +1,5 @@
+<%/* This allows to users to sort all live aucitons based on the current price, hi to lo.
+*/ %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <!--Import some libraries that have classes that we need -->

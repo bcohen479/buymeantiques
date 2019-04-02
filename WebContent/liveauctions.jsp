@@ -1,3 +1,11 @@
+<%  
+/*
+This will be the homepage of all current live auctions. 
+This will allow users to browse through these auctions. 
+There are a number of different links on this page that allow for different search and sort functionalities.
+*/
+
+%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <!--Import some libraries that have classes that we need -->

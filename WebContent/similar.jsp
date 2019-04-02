@@ -1,3 +1,5 @@
+<%/* This allows to users to search for all items that have the same name as a particular item.
+*/ %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <!--Import some libraries that have classes that we need -->
@@ -12,6 +14,7 @@
 <body>
 
 <table>
+<tr><td><a href="liveauctions.jsp">Back to All Live Auctions</a></td></tr>
 <tr><td>Similar Auctions</td></tr>
 <tr>
 <td>Seller</td>
