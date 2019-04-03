@@ -20,29 +20,35 @@
 			//Get the database connection
 			ApplicationDB db = new ApplicationDB();	
 			Connection con = db.getConnection();	
-			System.out.println("werk");
 			int bidID = -1;
 			int aucID = Integer.parseInt(request.getParameter("auction"));
 			int userID = Integer.parseInt(request.getParameter("bidder"));
+			double reserve = 0.00;
 			double bid = Double.parseDouble(request.getParameter("bidPrice"));
-			System.out.println("twerk");
-
+			String res = request.getParameter("hiddenPrice");
+			System.out.println("res:" + res);
+			if(!res.matches("")){
+				reserve = Double.parseDouble(request.getParameter("hiddenPrice"));
+			}
+	 /* 		if(request.getParameter("hiddenPrice")!=null){
+				reserve = Double.parseDouble(request.getParameter("hiddenPrice"));
+			} */
+ 
 			Date dt = new Date();
 			SimpleDateFormat sdf = 
 			     new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String currentTime = sdf.format(dt);
-			System.out.println("werk");
 			
 			//Create a SQL statement
 			Statement stmt = con.createStatement();
-			String query = "SELECT MAX(bid_id) FROM Bids WHERE Bids.auction_ID = '" + aucID + "';";
+			String query = "SELECT MAX(bid_id) FROM Bids;";
 			ResultSet rs = stmt.executeQuery(query);
 			if(rs.next()){
 				bidID = rs.getInt(1)+1;
 			}
 			
-			String insert = "INSERT INTO Bids(auction_ID, bid_id, bidder, datetime, price)"
-					+ "VALUES (?, ?, ?, ?, ?)";
+			String insert = "INSERT INTO Bids(auction_ID, bid_id, bidder, datetime, price, reserve)"
+					+ "VALUES (?, ?, ?, ?, ?,?)";
 			//Create a Prepared SQL statement allowing you to introduce the parameters of the query
 			PreparedStatement ps = con.prepareStatement(insert);
 
@@ -52,6 +58,7 @@
 			ps.setInt(3, userID);
 			ps.setString(4, currentTime);
 			ps.setDouble(5, bid);
+			ps.setDouble(6, reserve);
 			
 			ps.executeUpdate();
 			
