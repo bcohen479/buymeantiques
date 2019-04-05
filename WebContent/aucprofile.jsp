@@ -41,7 +41,7 @@ This page shows the history of bids for any auction.
 				<p>Description : <%=rs.getString("description") %></p>
 				<tr><a href="placebid.jsp?aucID=<%=aucID%>&aucTitle=<%=rs.getString("title")%>"><h5>PLACE BID</h5></a>
 				<tr><td>Seller: <%=seller%></td></tr>
-				<tr><td>Current Price: <%rs.getDouble("current_price"); %></td></tr>
+				<tr><td>Current Price: $<%=rs.getInt("current_price") %></td></tr>
 				<tr><td>End Date: <%=rs.getDate("end_date").toString()%></td></tr>
 				<%-- <tr><td>Description : <%=rs.getString("description") %></td></tr> --%>
 				

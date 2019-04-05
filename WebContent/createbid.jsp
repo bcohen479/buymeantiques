@@ -47,20 +47,21 @@
 				bidID = rs.getInt(1)+1;
 			}
 			
-			String insert = "INSERT INTO Bids(auction_ID, bid_id, bidder, datetime, price, reserve)"
-					+ "VALUES (?, ?, ?, ?, ?,?)";
+		/* 	String insert = "INSERT INTO Bids(auction_ID, bid_id, bidder, datetime, price, reserve)"
+					+ "VALUES (?, ?, ?, ?, ?,?)"; */
 			//Create a Prepared SQL statement allowing you to introduce the parameters of the query
-			PreparedStatement ps = con.prepareStatement(insert);
+			/* PreparedStatement ps = con.prepareStatement(insert); */
+			CallableStatement call = con.prepareCall("{call addBid(?, ?, ?, ?, ?, ?)}");
 
 			//Add parameters of the query. Start with 1, the 0-parameter is the INSERT statement itself
-			ps.setInt(1, aucID);
-			ps.setInt(2, bidID);
-			ps.setInt(3, userID);
-			ps.setString(4, currentTime);
-			ps.setDouble(5, bid);
-			ps.setDouble(6, reserve);
+			call.setInt(1, aucID);
+			call.setInt(2, bidID);
+			call.setInt(3, userID);
+			call.setDouble(4, reserve);
+			call.setString(5, currentTime);
+			call.setDouble(6, bid);
 			
-			ps.executeUpdate();
+			call.execute();
 			
 			
 			con.close();
