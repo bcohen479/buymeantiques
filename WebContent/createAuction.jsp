@@ -90,7 +90,6 @@
 				  System.out.println("FAILED INSERTING: " + ex);
 				    	
 			}
-			System.out.println("WORKING4\n");
 			ps.close();
 			ps2.close();
 			System.out.println("Item tables updated");

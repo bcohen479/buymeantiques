@@ -62,6 +62,8 @@
 			call.setDouble(6, bid);
 			
 			call.execute();
+			call.close();
+			
 			
 			
 			con.close();

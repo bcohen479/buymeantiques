@@ -20,12 +20,13 @@ This page shows the history of bids for any auction.
 
 <%
 	List<String> auction = new ArrayList<String>();
+	String aucID = request.getParameter("value");
 	
 	try{
 		ApplicationDB db = new ApplicationDB();	
 		Connection con = db.getConnection();
 		
-		String aucID = request.getParameter("value");
+
 		if(aucID != null){
 			System.out.println("id: "+aucID);
 			String seller = request.getParameter("val2");
@@ -57,7 +58,7 @@ This page shows the history of bids for any auction.
 <br>
 <tr><td>Auction History</td></tr>
 <tr>
-<td>Bidder</td>
+<td>Bidder ID</td>
 <td>Date</td>
 <td>Price</td>
 </tr>
@@ -67,8 +68,7 @@ This page shows the history of bids for any auction.
 	try{
 	ApplicationDB db = new ApplicationDB();	
 	Connection con = db.getConnection();	
-	String searchval=request.getParameter("aucID");
-	String query="SELECT * FROM Bids Where Bids.auction_ID='"+searchval+"';";
+	String query="SELECT * FROM Bids Where Bids.auction_ID='"+aucID+"';";
 	Statement stmt=con.createStatement();
 	ResultSet res=stmt.executeQuery(query);
 	while (res.next()){

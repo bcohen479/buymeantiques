@@ -3,6 +3,8 @@
 <!--Import some libraries that have classes that we need -->
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+<%@ page import="java.util.Date, java.text.*, java.time.format.DateTimeFormatter" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -37,31 +39,28 @@
 	ApplicationDB db = new ApplicationDB();	
 	Connection con = db.getConnection();	
 	
+	
 	String query="SELECT * FROM Live_Auction";
 	Statement stmt=con.createStatement();
 	ResultSet res=stmt.executeQuery(query);
-	System.out.println("yeet");
-/* 	int id = -1;
- *//*	int id = res.getInt("seller");
-	System.out.println("BROKE");
-	String getUser="SELECT user_name FROM Users WHERE Users.user_ID='"+id+"';";
-	Statement stmt3=con.createStatement();
-	ResultSet resu=stmt3.executeQuery(getUser);
-	String seller = resu.getString("user_name");
-	System.out.println(seller); */
+
 	while (res.next()){
+		//Skip finished auctions
+		Date currdate = new Date();
+		Date aucEnd = res.getDate("end_date");
+		if(aucEnd.before(currdate)){
+			continue;
+		}
+		
 		int id = res.getInt("seller");
-		System.out.println("BROKE");
 		
 		String getUser="SELECT user_name FROM Users WHERE Users.user_ID='"+id+"';";
 		Statement stmt3=con.createStatement();
 		ResultSet resu=stmt3.executeQuery(getUser);
 		String seller = "NA";
-		System.out.println(seller);
 		while(resu.next()){
 			seller = resu.getString("user_name");
 		}
-		System.out.println(seller); 
 		int aucID = res.getInt("auction_ID");
 		String title = res.getString("title");
 		String date = res.getDate("end_date").toString();

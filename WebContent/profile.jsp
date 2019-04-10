@@ -15,7 +15,7 @@
 <body>
 
 <table>
-<tr><td><a href="liveauctions.jsp">Back to All Live Auctions</a></td></tr>
+<tr><td><a href="homepage.jsp">Back to Home</a></td></tr>
 <tr><td>Previous Auction Participation</td></tr>
 <tr>
 <td>Auction ID</td>
