@@ -49,6 +49,45 @@
 		Date currdate = new Date();
 		Date aucEnd = res.getDate("end_date");
 		if(aucEnd.before(currdate)){
+			int id = res.getInt("auction_ID");
+			int seller = res.getInt("seller");
+			double price = res.getDouble("current_price");
+			int item = res.getInt("item_ID");
+			List<Integer> finished = new ArrayList<Integer>();
+			String query2 = "SELECT * FROM Complete_Auction";
+			Statement statement = con.createStatement();
+			ResultSet rs = statement.executeQuery(query2);
+			while(rs.next()){
+				finished.add(rs.getInt("auction_ID"));
+			}
+			if(!finished.contains(id)){
+				String getBuyer = "SELECT * FROM Bids WHERE auction_ID = "+id+" AND price="+price+";";
+				Statement buyerState = con.createStatement();
+				ResultSet buyers = buyerState.executeQuery(getBuyer);
+				int buyer = -1;
+				while(buyers.next()){
+					buyer = buyers.getInt("biddeer");
+				}
+				String insert = "INSERT INTO Complete_Auction(auction_ID, seller, buyer, item_ID, price, date)"
+						+ "VALUES (?, ?, ?, ?, ?,?)";
+				PreparedStatement ps = con.prepareStatement(insert);
+				
+				java.text.SimpleDateFormat sdf = 
+					     new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+				String currentTime = sdf.format(aucEnd);
+				ps.setInt(1, id);
+				ps.setInt(2, seller);
+				ps.setInt(3, buyer);
+				ps.setInt(4, item);
+				ps.setDouble(5, price);
+				ps.setString(6, currentTime);
+				
+				ps.executeUpdate();
+				
+				ps.close();
+			}
+			statement.close();
 			continue;
 		}
 		
