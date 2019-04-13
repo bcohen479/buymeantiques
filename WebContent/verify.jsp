@@ -23,15 +23,17 @@
 		Statement stmt = con.createStatement();
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		String query = "SELECT user_ID, password FROM Users WHERE user_name = '" + username + "';";
+		String query = "SELECT user_ID, password, status FROM Users WHERE user_name = '" + username + "';";
 		
 		ResultSet result = stmt.executeQuery(query);
 		while(result.next()){
 			String pw = result.getString("password");
 			int id = result.getInt(1);
+			String status= result.getString(3);
 			if(pw.equals(password)){
 				session.setAttribute("userID", id);
 				session.setAttribute("userName", username);
+				session.setAttribute("status", status);
 			    response.sendRedirect(response.encodeURL("success.jsp"));
 			}
 		}
