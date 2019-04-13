@@ -38,6 +38,7 @@
 			//Auction details
 			String aucDate = request.getParameter("auc_end");
 			String aucName = request.getParameter("auc_title");
+			String description = request.getParameter("description");
 /* 			java.util.Date date = new java.text.SimpleDateFormat("dd/MM/yyyy").parse(aucDate);
  */			Double startingPrice = Double.parseDouble(request.getParameter("auc_startingPrice"));
 			Double reservePrice = Double.parseDouble(request.getParameter("auc_reserve"));
@@ -89,13 +90,12 @@
 				  System.out.println("FAILED INSERTING: " + ex);
 				    	
 			}
-			System.out.println("WORKING4\n");
 			ps.close();
 			ps2.close();
 			System.out.println("Item tables updated");
 			
-			String makeAuction = "INSERT INTO Live_Auction(auction_ID, item_ID, current_price, end_date, seller, min_price, title)"
-					+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
+			String makeAuction = "INSERT INTO Live_Auction(auction_ID, item_ID, current_price, end_date, seller, min_price, title, description)"
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement aucPs = con.prepareStatement(makeAuction);
 			aucPs.setInt(1, aucId);
 			aucPs.setInt(2, itemId);
@@ -104,6 +104,7 @@
 			aucPs.setInt(5, user);
 			aucPs.setDouble(6, reservePrice);
 			aucPs.setString(7, aucName);
+			aucPs.setString(8, description);
 			
  			try{
 				aucPs.executeUpdate();
@@ -115,7 +116,7 @@
 				
 			//Close the connection. Don't forget to do it, otherwise you're keeping the resources of the server allocated.
 			con.close();
-			response.sendRedirect(response.encodeURL("liveauctions.jsp"));
+			response.sendRedirect(response.encodeURL("homepage.jsp"));
 			
 
 		} catch (Exception e) {

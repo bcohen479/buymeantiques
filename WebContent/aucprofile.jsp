@@ -16,16 +16,17 @@ This page shows the history of bids for any auction.
 </head>
 <body>
 
-<table cellspacing="5">
+<table cellspacing="5" style="table-layou:fixed">
 
 <%
 	List<String> auction = new ArrayList<String>();
+	String aucID = request.getParameter("value");
 	
 	try{
 		ApplicationDB db = new ApplicationDB();	
 		Connection con = db.getConnection();
 		
-		String aucID = request.getParameter("value");
+
 		if(aucID != null){
 			System.out.println("id: "+aucID);
 			String seller = request.getParameter("val2");
@@ -38,10 +39,12 @@ This page shows the history of bids for any auction.
 				<tr><h3><%=rs.getString("title")%></h3></tr>
 				<br>
 				<br>
-				<tr><a href="placebid.jsp"><h5>PLACE BID</h5></a>
+				<p>Description : <%=rs.getString("description") %></p>
+				<tr><a href="placebid.jsp?aucID=<%=aucID%>&aucTitle=<%=rs.getString("title")%>"><h5>PLACE BID</h5></a>
 				<tr><td>Seller: <%=seller%></td></tr>
-				<tr><td>Current Price: <%rs.getDouble("current_price"); %></td></tr>
+				<tr><td>Current Price: $<%=rs.getInt("current_price") %></td></tr>
 				<tr><td>End Date: <%=rs.getDate("end_date").toString()%></td></tr>
+				<%-- <tr><td>Description : <%=rs.getString("description") %></td></tr> --%>
 				
 			<%
 			}
@@ -52,10 +55,10 @@ This page shows the history of bids for any auction.
 		out.print("Error: "+ e);
 	}
 %>
-
+<br>
 <tr><td>Auction History</td></tr>
 <tr>
-<td>Bidder</td>
+<td>Bidder ID</td>
 <td>Date</td>
 <td>Price</td>
 </tr>
@@ -65,8 +68,7 @@ This page shows the history of bids for any auction.
 	try{
 	ApplicationDB db = new ApplicationDB();	
 	Connection con = db.getConnection();	
-	String searchval=request.getParameter("aucID");
-	String query="SELECT * FROM Bids Where Bids.auction_ID='"+searchval+"';";
+	String query="SELECT * FROM Bids Where Bids.auction_ID='"+aucID+"';";
 	Statement stmt=con.createStatement();
 	ResultSet res=stmt.executeQuery(query);
 	while (res.next()){
