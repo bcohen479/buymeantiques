@@ -128,7 +128,7 @@
 			bidPs.setInt(3, user);
 			bidPs.setDate(4,java.sql.Date.valueOf(aucDate));
 			bidPs.setDouble(5, startingPrice);
-			bidPs.setInt(6, 0);
+			bidPs.setDouble(6, reservePrice);
  			try{
 				bidPs.executeUpdate();
 			}catch(SQLException ex){
