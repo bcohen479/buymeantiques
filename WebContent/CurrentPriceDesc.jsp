@@ -14,7 +14,11 @@
 <body>
 <table>
 <tr>
-<a href="liveauctions.jsp">Sort by Auction ID  </a>
+<td><a href="homepage.jsp">Back to Homepage</a></td></tr>
+<tr>
+<td><a href="liveauctions.jsp">Back to Advanced Search</a></td>
+</tr>
+<tr>
 <a href="CurrentPrice.jsp">Sort by Price Lo to Hi </a>
 <a href="EndDate.jsp">Sort by End Date </a>
 <td>Auction ID</td>

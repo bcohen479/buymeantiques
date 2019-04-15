@@ -1,6 +1,3 @@
-<%
-/* This allows a user to see another users bidding history. */
-%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <!--Import some libraries that have classes that we need -->
@@ -10,16 +7,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Live Auctions</title>
+<title>Auction | Buymeantiques</title>
 </head>
 <body>
 
 <table>
-<tr><td><a href="homepage.jsp">Back to Home</a></td></tr>
-<tr><td><a href="liveauctions.jsp">Back to Advanced Search</a></td></tr>
-<tr><td>Previous Auction Participation</td></tr>
+<tr><td>Auction History</td></tr>
 <tr>
-<td>Auction ID</td>
+<td>Bidder</td>
 <td>Date</td>
 <td>Price</td>
 </tr>
@@ -29,14 +24,14 @@
 	try{
 	ApplicationDB db = new ApplicationDB();	
 	Connection con = db.getConnection();	
-	String searchval=request.getParameter("userID");
-	String query="SELECT * FROM Bids Where Bids.bidder='"+searchval+"';";
+	String searchval=request.getParameter("aucID");
+	String query="SELECT * FROM Bids Where Bids.auction_ID='"+searchval+"';";
 	Statement stmt=con.createStatement();
 	ResultSet res=stmt.executeQuery(query);
 	while (res.next()){
 		%>
 		<tr>
-		<td><%=res.getInt("auction_ID")%></td>
+		<td><%=res.getInt("bidder")%></td>
 		<td><%=res.getDate("datetime")%></td>
 		<td><%=res.getInt("price")%></td>
 	<%

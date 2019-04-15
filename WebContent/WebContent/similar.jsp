@@ -1,4 +1,4 @@
-<%/* This allows to users to search for all items of a particular name.
+<%/* This allows to users to search for all items that have the same name as a particular item.
 */ %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
@@ -12,16 +12,14 @@
 <title>Live Auctions</title>
 </head>
 <body>
+
 <table>
+<tr><td><a href="liveauctions.jsp">Back to All Live Auctions</a></td></tr>
+<tr><td>Similar Auctions</td></tr>
 <tr>
-<td><a href="homepage.jsp">Back to Homepage</a></td></tr>
-<tr>
-<td><a href="liveauctions.jsp">Back to Advanced Search</a></td>
-</tr>
-<tr>
-<td>Auction ID</td>
-<td>End Date</td>
-<td>Current Price</td>
+<td>Seller</td>
+<td>Date</td>
+<td>Price</td>
 <td>Item</td>
 <td>Color</td>
 <td>Style</td>
@@ -32,29 +30,20 @@
 	try{
 	ApplicationDB db = new ApplicationDB();	
 	Connection con = db.getConnection();	
-	String searchval=request.getParameter("namsearch");
-	String query="SELECT * FROM Live_Auction WHERE Live_Auction.item_ID IN (SELECT item_ID FROM Items WHERE Items.name='"+searchval+"');";
+	String searchval=request.getParameter("aucID2");
+	String query="SELECT * FROM Complete_Auction,Items WHERE Complete_Auction.item_ID=Items.item_ID AND Complete_Auction.auction_ID='"+searchval+"';";
 	Statement stmt=con.createStatement();
 	ResultSet res=stmt.executeQuery(query);
 	while (res.next()){
 		%>
 		<tr>
-		<td><%=res.getInt("auction_ID")%></td>
-		<td><%=res.getDate("end_date")%></td>
-		<td><%=res.getInt("current_price")%></td>
-		
+		<td><%=res.getInt("Complete_Auction.seller")%></td>
+		<td><%=res.getDate("Complete_Auction.date")%></td>
+		<td><%=res.getInt("Complete_Auction.price")%></td>
+		<td><%=res.getString("Items.name")%></td>
+		<td><%=res.getString("Items.color")%></td>
+		<td><%=res.getString("Items.style")%></td>
 	<%
-		String query2="SELECT * FROM Items WHERE Items.item_ID='"+res.getInt("item_ID")+ "';";
-		Statement stmt2=con.createStatement();
-		ResultSet res2=stmt2.executeQuery(query2);
-		while (res2.next()){
-		%>
-		<td><%=res2.getString("name")%></td>
-		<td><%=res2.getString("color")%></td>
-		<td><%=res2.getString("style")%></td>
-		</tr>
-		<%
-		}
 	}
 	%>
 	</table>

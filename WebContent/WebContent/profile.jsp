@@ -1,6 +1,6 @@
-<%/*
-This allows for users to search for all items of a particular color.
-*/%>
+<%
+/* This allows a user to see another users bidding history. */
+%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <!--Import some libraries that have classes that we need -->
@@ -13,19 +13,14 @@ This allows for users to search for all items of a particular color.
 <title>Live Auctions</title>
 </head>
 <body>
+
 <table>
-<tr>
-<td><a href="homepage.jsp">Back to Homepage</a></td></tr>
-<tr>
-<td><a href="liveauctions.jsp">Back to Advanced Search</a></td>
-</tr>
+<tr><td><a href="homepage.jsp">Back to Home</a></td></tr>
+<tr><td>Previous Auction Participation</td></tr>
 <tr>
 <td>Auction ID</td>
-<td>End Date</td>
-<td>Current Price</td>
-<td>Item</td>
-<td>Color</td>
-<td>Style</td>
+<td>Date</td>
+<td>Price</td>
 </tr>
 <%
 	List<String> list = new ArrayList<String>();
@@ -33,30 +28,17 @@ This allows for users to search for all items of a particular color.
 	try{
 	ApplicationDB db = new ApplicationDB();	
 	Connection con = db.getConnection();	
-	String searchval=request.getParameter("colsearch");
-	System.out.println(searchval);
-	String query="SELECT * FROM Live_Auction WHERE Live_Auction.item_ID IN (SELECT item_ID FROM Items WHERE Items.color='"+searchval+"');";
+	String searchval=request.getParameter("userID");
+	String query="SELECT * FROM Bids Where Bids.bidder='"+searchval+"';";
 	Statement stmt=con.createStatement();
 	ResultSet res=stmt.executeQuery(query);
 	while (res.next()){
 		%>
 		<tr>
 		<td><%=res.getInt("auction_ID")%></td>
-		<td><%=res.getDate("end_date")%></td>
-		<td><%=res.getInt("current_price")%></td>
-		
+		<td><%=res.getDate("datetime")%></td>
+		<td><%=res.getInt("price")%></td>
 	<%
-		String query2="SELECT * FROM Items WHERE Items.item_ID='"+res.getInt("item_ID")+ "';";
-		Statement stmt2=con.createStatement();
-		ResultSet res2=stmt2.executeQuery(query2);
-		while (res2.next()){
-		%>
-		<td><%=res2.getString("name")%></td>
-		<td><%=res2.getString("color")%></td>
-		<td><%=res2.getString("style")%></td>
-		</tr>
-		<%
-		}
 	}
 	%>
 	</table>
