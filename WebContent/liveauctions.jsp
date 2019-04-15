@@ -54,7 +54,7 @@ There are a number of different links on this page that allow for different sear
 <form name="search bar5" method="post" action="aucprofile.jsp">
 <table>
 <tr>
-<td>Search For a Auction by AucID</td><td> <input type="text" name="aucID"></td>
+<td>Search For a Auction by AucID</td><td> <input type="text" name="value"></td>
 <td><a href="aucprofile.jsp">Search</a></td>
 </tr>
 </table>

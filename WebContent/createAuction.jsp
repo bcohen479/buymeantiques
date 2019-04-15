@@ -113,6 +113,20 @@
 			} 
 			aucPs.close();
 			System.out.println("Auction created\n");
+			//Set Initial Bid
+			int iniBid = -1;
+			String queryBid = "SELECT MAX(bid_id) FROM Bids;";
+			ResultSet latestBid = stmt.executeQuery(queryBid);
+			if(latestBid.next()){
+				iniBid = latestBid.getInt(1) + 1;
+			}
+			String initialBid = "INSERT INTO Bids(bid_id, auction_ID, bidder, datetime, price, reserve)"
+					+ "VALUES(?, ?, ?, ?, ?, ?)";
+			PreparedStatement bidPs = con.prepareStatement(initialBid);
+			bidPs.setInt(1, iniBid);
+			bidPs.setInt(2, aucId);
+			
+			
 				
 			//Close the connection. Don't forget to do it, otherwise you're keeping the resources of the server allocated.
 			con.close();

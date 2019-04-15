@@ -80,7 +80,7 @@ This page shows the history of bids for any auction.
 	<%
 	}
 	%>
-	<tr><td><a href="liveauctions.jsp">Back to All Live Auctions</a></td></tr>
+	<tr><td><a href="homepage.jsp">Back to home</a></td></tr>
 	</table>
 	<%res.close();
 	stmt.close();
