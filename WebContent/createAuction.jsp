@@ -125,8 +125,16 @@
 			PreparedStatement bidPs = con.prepareStatement(initialBid);
 			bidPs.setInt(1, iniBid);
 			bidPs.setInt(2, aucId);
-			
-			
+			bidPs.setInt(3, user);
+			bidPs.setDate(4,java.sql.Date.valueOf(aucDate));
+			bidPs.setDouble(5, startingPrice);
+			bidPs.setInt(6, 0);
+ 			try{
+				aucPs.executeUpdate();
+			}catch(SQLException ex){
+				  System.out.println("FAILED to make initial bid: " + ex);
+			} 
+			bidPs.close();
 				
 			//Close the connection. Don't forget to do it, otherwise you're keeping the resources of the server allocated.
 			con.close();
