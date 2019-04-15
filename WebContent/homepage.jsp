@@ -15,6 +15,7 @@
 <br>
 <h2>Home</h2>
 <a href="profile.jsp">Profile</a>    <a href="#">Alerts    </a> <br>
+<a href="createAuctionForm.jsp">CREATE AUCTION</a> <br>
 <a href="liveauctions.jsp">Advanced Search</a>
 <br>
 <table cellspacing="10">

@@ -130,7 +130,7 @@
 			bidPs.setDouble(5, startingPrice);
 			bidPs.setInt(6, 0);
  			try{
-				aucPs.executeUpdate();
+				bidPs.executeUpdate();
 			}catch(SQLException ex){
 				  System.out.println("FAILED to make initial bid: " + ex);
 			} 
