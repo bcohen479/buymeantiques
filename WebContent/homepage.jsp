@@ -67,7 +67,7 @@
 				ResultSet buyers = buyerState.executeQuery(getBuyer);
 				int buyer = -1;
 				while(buyers.next()){
-					buyer = buyers.getInt("biddeer");
+					buyer = buyers.getInt("bidder");
 				}
 				String insert = "INSERT INTO Complete_Auction(auction_ID, seller, buyer, item_ID, price, date)"
 						+ "VALUES (?, ?, ?, ?, ?,?)";
@@ -107,7 +107,7 @@
 		int price = res.getInt("current_price");
 		%>
 		<tr>
-		<td><a href="aucprofile.jsp?value=<%=aucID%>&val2=<%=seller%>"><%=title%><% System.out.println(seller); %></td></a>
+		<td><a href="aucprofile.jsp?value=<%=aucID%>&val2=<%=seller%>"><%=title%></td></a>
 		<td><%=date %></td>
 		<td><%=price %></td>
 		<td><%=seller %></td>
