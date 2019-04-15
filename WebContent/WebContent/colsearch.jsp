@@ -1,5 +1,6 @@
-<%/* This allows to users to sort all live aucitons based on the current price, lo to hi.
-*/ %>
+<%/*
+This allows for users to search for all items of a particular color.
+*/%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <!--Import some libraries that have classes that we need -->
@@ -12,19 +13,17 @@
 <title>Live Auctions</title>
 </head>
 <body>
-<tr>
-<td><a href="homepage.jsp">Back to Homepage</a></td></tr>
-<tr>
-<td><a href="liveauctions.jsp">Back to Advanced Search</a></td>
-</tr>
-<tr>
-<a href="EndDate.jsp">Sort by End Date </a>
-<a href="CurrentPriceDesc.jsp">Sort by Price Hi to Lo </a>
 <table>
+<tr>
+<td><a href="liveauctions.jsp">Back to All Live Auctions</a></td>
+<td><a href="EndDate.jsp">Sort by End Date</a></td>
+<td><a href="CurrentPrice.jsp">Sort by Price Lo to Hi</a></td>
+<td><a href="CurrentPriceDesc.jsp">Sort by Price Hi to Lo</a></td>
+</tr>
 <tr>
 <td>Auction ID</td>
 <td>End Date</td>
-<td><a href="CurrentPriceDesc.jsp">Current Price</a></td>
+<td>Current Price</td>
 <td>Item</td>
 <td>Color</td>
 <td>Style</td>
@@ -35,12 +34,11 @@
 	try{
 	ApplicationDB db = new ApplicationDB();	
 	Connection con = db.getConnection();	
-	String query="SELECT * FROM Live_Auction ORDER BY current_price";
+	String searchval=request.getParameter("colsearch");
+	System.out.println(searchval);
+	String query="SELECT * FROM Live_Auction WHERE Live_Auction.item_ID IN (SELECT item_ID FROM Items WHERE Items.color='"+searchval+"');";
 	Statement stmt=con.createStatement();
 	ResultSet res=stmt.executeQuery(query);
-//	String query2="SELECT * FROM Items,Live_Auction WHERE Items.item_ID=Live_Auction.item_ID;";
-	//Statement stmt2=con.createStatement();
-	//ResultSet res2=stmt2.executeQuery(query2);
 	while (res.next()){
 		%>
 		<tr>

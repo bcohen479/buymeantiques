@@ -18,13 +18,11 @@ There are a number of different links on this page that allow for different sear
 <title>Live Auctions</title>
 </head>
 <body>
-<tr>
-<td><a href="homepage.jsp">Back to Homepage</a></td></tr>
 <br>
 <form name="search bar" method="post" action="namesearch.jsp">
 <table>
 <tr>
-<td>Search by Item name</td><td> <input type="text" name="namsearch"></td>
+<td>Search by Name</td><td> <input type="text" name="namsearch"></td>
 <td><a href="namesearch.jsp">Search</a></td>
 </tr>
 </table>

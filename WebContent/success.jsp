@@ -33,7 +33,7 @@ display:block;}
 <body>
 <p> 
 Welcome <%=session.getAttribute("userName")%> 
-<a href="liveauctions.jsp">Live Auctions</a> 
+<a href="homepage.jsp">Home Page</a> 
 <a href="logout.jsp">Log out</a>
 
 <div id= status, class= <%= session.getAttribute("status")+"_a"%>>

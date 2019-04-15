@@ -12,12 +12,7 @@
 <title>Live Auctions</title>
 </head>
 <body>
-<tr>
-<td><a href="homepage.jsp">Back to Homepage</a></td></tr>
-<tr>
-<td><a href="liveauctions.jsp">Back to Advanced Search</a></td>
-</tr>
-<tr>
+<a href="liveauctions.jsp">Sort by Auction ID  </a>
 <a href="EndDate.jsp">Sort by End Date </a>
 <a href="CurrentPriceDesc.jsp">Sort by Price Hi to Lo </a>
 <table>

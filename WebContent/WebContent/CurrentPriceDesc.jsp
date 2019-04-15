@@ -1,4 +1,4 @@
-<%/* This allows to users to sort all live aucitons based on the current price, lo to hi.
+<%/* This allows to users to sort all live aucitons based on the current price, hi to lo.
 */ %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
@@ -12,19 +12,14 @@
 <title>Live Auctions</title>
 </head>
 <body>
-<tr>
-<td><a href="homepage.jsp">Back to Homepage</a></td></tr>
-<tr>
-<td><a href="liveauctions.jsp">Back to Advanced Search</a></td>
-</tr>
-<tr>
-<a href="EndDate.jsp">Sort by End Date </a>
-<a href="CurrentPriceDesc.jsp">Sort by Price Hi to Lo </a>
 <table>
 <tr>
+<a href="liveauctions.jsp">Sort by Auction ID  </a>
+<a href="CurrentPrice.jsp">Sort by Price Lo to Hi </a>
+<a href="EndDate.jsp">Sort by End Date </a>
 <td>Auction ID</td>
 <td>End Date</td>
-<td><a href="CurrentPriceDesc.jsp">Current Price</a></td>
+<td><a href="CurrentPrice.jsp">Current Price</a></td>
 <td>Item</td>
 <td>Color</td>
 <td>Style</td>
@@ -35,7 +30,7 @@
 	try{
 	ApplicationDB db = new ApplicationDB();	
 	Connection con = db.getConnection();	
-	String query="SELECT * FROM Live_Auction ORDER BY current_price";
+	String query="SELECT * FROM Live_Auction ORDER BY current_price DESC";
 	Statement stmt=con.createStatement();
 	ResultSet res=stmt.executeQuery(query);
 //	String query2="SELECT * FROM Items,Live_Auction WHERE Items.item_ID=Live_Auction.item_ID;";
