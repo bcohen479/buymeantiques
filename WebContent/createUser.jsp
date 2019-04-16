@@ -51,8 +51,8 @@
 				String pw = request.getParameter("password");
 				out.println("working2");
 				//Make an insert statement for the Sells table:
-				String insert = "INSERT INTO Users(user_ID, user_name, email, password)"
-						+ "VALUES (?, ?, ?, ?)";
+				String insert = "INSERT INTO Users(user_ID, user_name, email, password, Status)"
+						+ "VALUES (?, ?, ?, ?,?)";
 				//Create a Prepared SQL statement allowing you to introduce the parameters of the query
 				PreparedStatement ps = con.prepareStatement(insert);
 
@@ -61,6 +61,7 @@
 				ps.setString(2, username);
 				ps.setString(3, email);
 				ps.setString(4, pw);
+				ps.setString(5, "enduser");
 				//Run the query against the DB
 				try{
 					ps.executeUpdate();

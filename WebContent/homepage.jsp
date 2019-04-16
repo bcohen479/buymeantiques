@@ -15,20 +15,20 @@
 .admin_a{
   display : block;
 }
-._a{
+.enduser_a{
  display: none;
 }
 .customrep_a{
 display:none;}
 
 .admin_b{
-  display : block;
+  display : none;
 }
-._b{
+.enduser_b{
  display: none;
 }
 .customrep_b{
-display:none;}
+display:block;}
 </style>
 
 
