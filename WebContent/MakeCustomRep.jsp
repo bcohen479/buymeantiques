@@ -25,7 +25,7 @@ if(account.next()){
 	out.print("<a href=Admin.jsp>Success!! Go back to Admin</a>");
 }
 else{
-	out.print("<a href=createUser.jsp>Must create user account first</a>");
+	out.print("<a href=index.jsp>Must create user account first</a>");
 }
 %>
 </body>

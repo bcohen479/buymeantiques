@@ -10,11 +10,50 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Home | Buymeantiques</title>
+
+<style>
+.admin_a{
+  display : block;
+}
+._a{
+ display: none;
+}
+.customrep_a{
+display:none;}
+
+.admin_b{
+  display : block;
+}
+._b{
+ display: none;
+}
+.customrep_b{
+display:none;}
+</style>
+
+
+
 </head>
 <body>
 <br>
 <h2>Home</h2>
-<a href="profile.jsp">Profile</a>    <a href="#">Alerts    </a> <br>
+<table>
+<tr>
+
+<td><a href="profile.jsp">Profile</a></td>
+ <td><a href="#">Alerts    </a> </td>
+<td>
+<div id= status, class= <%= session.getAttribute("status")+"_a"%>>
+<a href="Admin.jsp">Administrative functions</a>
+</div></td><td>
+<div id= status, class=<%=session.getAttribute("status")+"_b" %>>
+<a href="CustomerRep.jsp">Customer Representative Functions</a>
+</div></td>
+
+</tr>
+</table>
+<br>
+
 <a href="createAuctionForm.jsp">CREATE AUCTION</a> <br>
 <a href="liveauctions.jsp">Advanced Search</a>
 <br>
