@@ -12,7 +12,7 @@
 Login
 <br>
 
-<form method="post" action="homepage.jsp">
+<form method="post" action="verify.jsp">
 	<table>
 	<tr>    
 	<td>Username</td><td><input type="text" name="username"></td>
