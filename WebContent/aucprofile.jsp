@@ -27,6 +27,7 @@ This page shows the history of bids for any auction.
 		
 
 		if(aucID != null){
+			//System.out.print("Welcome "+session.getAttribute("userName"));;
 			System.out.println("id: "+aucID);
 			String seller = request.getParameter("val2");
 			System.out.println(seller);
@@ -84,11 +85,47 @@ This page shows the history of bids for any auction.
 	%>
 	<tr><td><a href="homepage.jsp">Back to home</a></td></tr>
 	</table>
-	<%res.close();
+	
+	Forum<br><br>
+	<table>
+	<tr>
+<td>User</td>
+<td>Question</td>
+<td>Answer</td>
+</tr>
+	<%
+		ApplicationDB d= new ApplicationDB();
+		Connection Conn= d.getConnection();
+		
+		String q="SELECT Users.user_name, Question, Answer FROM Questions JOIN Users ON Questions.Asker=Users.User_ID WHERE Questions.Auction_ID= "+aucID;
+		ResultSet R=stmt.executeQuery(q);
+		
+		while(R.next()){
+		%>
+		<tr>
+		<td><%=R.getString("Users.user_name")%></td>
+		<td><%=R.getString("Question")%></td>
+		<td><%=R.getString("Answer") %>
+		</tr>	
+	<% }%>	
+		
+	
+	
+	
+	</table>
+	<br>
+	<form method=post, action="askQuestion.jsp">
+	 Post Question <input type="text", name="q"> 
+	 <input type="hidden", name="auctionID", value=<%=aucID %> display>
+	<input type="submit", value="submit">
+	</form>
+	
+	<% res.close();
 	stmt.close();
 	}catch (Exception e) {
 		out.print("Error: "+ e);
-	}
-	%>
+	}%>
+	
+
 </body>
 </html>
