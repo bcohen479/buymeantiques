@@ -7,7 +7,7 @@
 <title>Customer Representative Functions</title>
 </head>
 <body>
-<a href= "Questions.jsp">Check Buyer Questions</a>
+<a href= >Check Buyer Questions</a>
 
 <a href="editAccount.jsp">Edit Account Information</a>
 

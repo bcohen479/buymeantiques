@@ -11,7 +11,7 @@
 
 </head>
 <body>
-Best Selling:
+Top Selling:
 <br>
 	<form method="post" action="BestSelling.jsp">
 		<select name="attr" size=1>
@@ -24,6 +24,11 @@ Best Selling:
 	</form>
 <br>
 
+
+<form method="post" action="BestBuyers.jsp">
+<input type="submit", value="View Top Buyers">
+</form>
+<br>
 Earnings Per:
 <br>
 	<form method="post" action="EarningsPer.jsp">
@@ -31,6 +36,7 @@ Earnings Per:
 			<option value="name">Item</option>
 			<option value="Users.user_name">Seller</option>
 			<option value="Items.Item_ID">Item type</option>
+			<input type="submit" value="submit">
 		</select>&nbsp;<br>
 	</form>
 <br>

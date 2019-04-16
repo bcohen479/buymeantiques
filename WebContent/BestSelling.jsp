@@ -10,6 +10,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+Best Selling:
 	<%
 		List<String> list = new ArrayList<String>();
 
@@ -23,8 +25,8 @@
 			Statement stmt = con.createStatement();
 			//Get the combobox from the index.jsp
 			String attr = request.getParameter("attr");
-			
-			String str = "SELECT "+attr+", COUNT(Complete_Auction.Item_ID) AS 'Number' FROM ((Complete_Auction Join Items ON Complete_Auction.Item_ID=Items.Item_ID) Join Users ON Complete_Auction.seller=Users.user_ID) ORDER BY Number DESC LIMIT "+request.getParameter("quant");
+			String num= request.getParameter("quant");
+			String str = "SELECT "+attr+", COUNT(Complete_Auction.Item_ID) AS 'Number' FROM ((Complete_Auction Join Items ON Complete_Auction.Item_ID=Items.Item_ID) Join Users ON Complete_Auction.seller=Users.user_ID) Group By "+attr+ " ORDER BY Number DESC LIMIT "+num;
 			//Run the query against the database.
 			ResultSet result = stmt.executeQuery(str);
 
