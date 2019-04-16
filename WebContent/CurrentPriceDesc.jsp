@@ -21,7 +21,7 @@
 <tr>
 <a href="CurrentPrice.jsp">Sort by Price Lo to Hi </a>
 <a href="EndDate.jsp">Sort by End Date </a>
-<td>Auction ID</td>
+<td>Title</td>
 <td>End Date</td>
 <td><a href="CurrentPrice.jsp">Current Price</a></td>
 <td>Item</td>
@@ -34,7 +34,7 @@
 	try{
 	ApplicationDB db = new ApplicationDB();	
 	Connection con = db.getConnection();	
-	String query="SELECT * FROM Live_Auction ORDER BY current_price DESC";
+	String query="SELECT * FROM Live_Auction WHERE Live_Auction.end_date>NOW()ORDER BY current_price DESC";
 	Statement stmt=con.createStatement();
 	ResultSet res=stmt.executeQuery(query);
 //	String query2="SELECT * FROM Items,Live_Auction WHERE Items.item_ID=Live_Auction.item_ID;";
@@ -43,7 +43,7 @@
 	while (res.next()){
 		%>
 		<tr>
-		<td><%=res.getInt("auction_ID")%></td>
+		<td><a href="aucprofile.jsp?value=<%=res.getInt("auction_ID")%>&val2=<%=res.getString("seller")%>"><%=res.getString("title")%></td></a>
 		<td><%=res.getDate("end_date")%></td>
 		<td><%=res.getInt("current_price")%></td>
 		

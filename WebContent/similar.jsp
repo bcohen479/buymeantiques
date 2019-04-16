@@ -18,6 +18,7 @@
 <tr><td><a href="liveauctions.jsp">Back to Advanced Search</a></td></tr>
 <tr><td>Similar Auctions</td></tr>
 <tr>
+<td>Title</td>
 <td>Seller</td>
 <td>Date</td>
 <td>Price</td>
@@ -32,12 +33,14 @@
 	ApplicationDB db = new ApplicationDB();	
 	Connection con = db.getConnection();	
 	String searchval=request.getParameter("aucID2");
-	String query="SELECT DISTINCT * FROM Live_Auction,Items WHERE Items.style IN(SELECT style FROM Live_Auction, Items WHERE Live_Auction.end_date> (NOW()-INTERVAL 1 MONTH) AND Live_Auction.item_ID=Items.item_ID AND Live_Auction.auction_ID='"+searchval+"');";
+	String query="SELECT * FROM Live_Auction, Items WHERE Live_Auction.item_ID=Items.item_ID AND Live_Auction.auction_ID IN (SELECT DISTINCT Live_Auction.auction_ID FROM Live_Auction,Items WHERE Live_Auction.end_date>=(NOW()-INTERVAL 1 MONTH) AND Live_Auction.item_ID IN(SELECT Items.item_ID FROM Items WHERE Items.name IN( SELECT Items.name FROM Live_Auction, Items WHERE Items.item_ID=Live_Auction.item_ID AND Live_Auction.title='"+searchval+"')));";
+
 	Statement stmt=con.createStatement();
 	ResultSet res=stmt.executeQuery(query);
 	while (res.next()){
 		%>
 		<tr>
+		<td><a href="aucprofile.jsp?value=<%=res.getInt("auction_ID")%>&val2=<%=res.getString("seller")%>"><%=res.getString("title")%></td></a>
 		<td><%=res.getInt("Live_Auction.seller")%></td>
 		<td><%=res.getDate("Live_Auction.end_date")%></td>
 		<td><%=res.getInt("Live_Auction.current_price")%></td>
