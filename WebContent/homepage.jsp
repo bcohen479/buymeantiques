@@ -73,6 +73,8 @@ display:block;}
 <td>Style</td>
 </tr>
 <%
+
+//System.out.print("Welcome "+session.getAttribute("userName"));
 	List<String> list = new ArrayList<String>();
 
 	try{
