@@ -3,18 +3,58 @@
 <!--Import some libraries that have classes that we need -->
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
-<%@ page import="java.util.Date, java.text.*, java.time.format.DateTimeFormatter" %>
+<%@ page import="java.util.Date, java.text.*, java.time.format.DateTimeFormatter.*" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Home | Buymeantiques</title>
+
+<style>
+.admin_a{
+  display : block;
+}
+.enduser_a{
+ display: none;
+}
+.customrep_a{
+display:none;}
+
+.admin_b{
+  display : none;
+}
+.enduser_b{
+ display: none;
+}
+.customrep_b{
+display:block;}
+</style>
+
+
+
 </head>
 <body>
 <br>
 <h2>Home</h2>
-<a href="profile.jsp">Profile</a>    <a href="#">Alerts    </a> <br>
+<table>
+<tr>
+
+<td><a href="profile.jsp">Profile</a></td>
+ <td><a href="#">Alerts    </a> </td>
+ <td><a href="logout.jsp">Log out</a><td>
+<td>
+<div id= status, class= <%= session.getAttribute("status")+"_a"%>>
+<a href="Admin.jsp">Administrative functions</a>
+</div></td><td>
+<div id= status, class=<%=session.getAttribute("status")+"_b" %>>
+<a href="CustomerRep.jsp">Customer Representative Functions</a>
+</div></td>
+
+</tr>
+</table>
+<br>
+
 <a href="createAuctionForm.jsp">CREATE AUCTION</a> <br>
 <a href="liveauctions.jsp">Advanced Search</a>
 <br>

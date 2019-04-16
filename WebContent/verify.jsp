@@ -34,7 +34,11 @@
 				session.setAttribute("userID", id);
 				session.setAttribute("userName", username);
 				session.setAttribute("status", status);
+<<<<<<< HEAD
 			    response.sendRedirect(response.encodeURL("success.jsp"));
+=======
+			    response.sendRedirect(response.encodeURL("homepage.jsp"));
+>>>>>>> 07c2b9632fd59e10fdfa04ae8aef017ca0e5059f
 			}
 		}
 	}catch (Exception e) {
