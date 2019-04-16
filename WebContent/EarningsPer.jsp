@@ -24,11 +24,11 @@
 			String attr = request.getParameter("attr");
 			
 			String str;
+			
 			if(!attr.equals("Items.Item_ID")){
-			str = "SELECT "+attr+", sum(Complete_Auction.price) AS 'Earnings' FROM ((Complete_Auction Join Items ON Complete_Auction.Item_ID=Items.Item_ID) Join Users ON Complete_Auction.seller=Users.user_ID)";}
-			else{
-			str="Blah";
-			}
+				
+			str = "SELECT "+attr+", sum(Complete_Auction.price) AS 'Earnings' FROM ((Complete_Auction Join Items ON Complete_Auction.Item_ID=Items.Item_ID) Join Users ON Complete_Auction.seller=Users.user_ID) Group By "+attr;
+			
 			//Run the query against the database.
 			ResultSet result = stmt.executeQuery(str);
 
@@ -66,7 +66,27 @@
 
 			}
 			out.print("</table>");
+			}
+			
+		else{
+			str= "SELECT sum(J.price) As J, sum(C.price) AS C, sum(T.price) AS T From (Complete_Auction As C Join Chairs ON C.Item_ID=Chairs.Item_ID), (Complete_Auction As J Join Jewelry ON J.Item_ID=Jewelry.Item_ID), (Complete_Auction As T Join 'Tables' On T.Item_ID='Tables'.Item_ID)";
+			ResultSet res = stmt.executeQuery(str);
+			res.next();
+			
 
+			out.print("<table>");
+			out.print("<tr><td>Item Type</td><td>Jewelry</td><td>Chairs</td></tr>");
+			out.print("<tr><td>Earnings</td><td>");
+			out.print(res.getInt("J"));
+			out.print("</td><td>");
+			out.print(res.getInt("C"));
+			out.print("</td><td></tr></table>");
+			
+			
+		}
+			
+			
+			
 			//close the connection.
 			con.close();
 

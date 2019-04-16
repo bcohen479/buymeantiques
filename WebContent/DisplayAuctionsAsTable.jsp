@@ -18,11 +18,14 @@
 			//Make a SELECT query from the table specified by the 'command' parameter at the index.jsp
 			String str = "SELECT * FROM Live_Auction WHERE "+field+"= '"+val+ "'";			
 			
-			ResultSet result = stmt.executeQuery(str);
+			ResultSet res = stmt.executeQuery(str);
 			
 			
 			//out.print(result.getInt("auction_ID"));
 			//Make an HTML table to show the results in:
+		if(res.next()){
+			ResultSet result=stmt.executeQuery(str);
+		
 			out.print("<form method='post' action='findandEditAuction.jsp'>");
 			out.print("<table>");
 
@@ -58,12 +61,13 @@
 
 
 			//parse out the results
+			
 			while (result.next()) {
 				//make a row
 				
 				out.print("<tr>");
 				out.print("<td>");
-				out.print("<input type='radio' name=aucID value="+result.getInt("auction_ID")+">");
+				out.print("<input type='radio' name=aucID value="+result.getInt("auction_ID")+" required>");
 				out.print("</td>");
 				
 				
@@ -90,12 +94,16 @@
 				
 				out.print("</tr>");
 			}
-			out.print("</table>");
+			
+			
 		
 			
 			out.print("<br><br><br>");
+			out.print("<tr><td>");
 			out.print("<button type='submit' name='remove' value='remove'> Delete selected Auction </button><br>");
+			out.print("</td><td>");
 			out.print("<button type='submit' name='showbids' value='showbids'> Show and Edit bids for this Auction</button>");
+			out.print("</td></tr>");
 			out.print("<br><br><br>");
 			
 			out.print("<tr>");
@@ -135,8 +143,11 @@
 		
 		
 			//out.print("<input type='submit' value='submit'>");
-			
+			out.print("</table>");
 			out.print("</form>");
+}else{
+	out.print("<a href=editAuction.jsp> No auctions matching your search were found.  Please try again </a>");}
+
 			
 			//close the connection.
 			db.closeConnection(con);
