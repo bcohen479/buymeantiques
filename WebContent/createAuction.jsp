@@ -49,7 +49,7 @@
 				aucId = latest.getInt(1) + 1;
 			}
 			
-			int user = 0;
+			int user = -1;
 			if(session.getAttribute("userID")!=null){
 				user = (Integer) session.getAttribute("userID");
 			}

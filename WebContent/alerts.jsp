@@ -9,70 +9,24 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Home | Buymeantiques</title>
-
-<style>
-.admin_a{
-  display : block;
-}
-.enduser_a{
- display: none;
-}
-.customrep_a{
-display:none;}
-
-.admin_b{
-  display : none;
-}
-.enduser_b{
- display: none;
-}
-.customrep_b{
-display:block;}
-</style>
-
-
+<title>Alerts | Buymeantiques</title>
 
 </head>
 <body>
 <br>
-<h2>Home</h2>
+<h2>Alerts for <%=session.getAttribute("userName") %></h2>
 <table>
-<tr>
 
-<td><a href="profile.jsp">Profile</a></td>
- <td><a href="alerts.jsp">Alerts    </a> </td>
- <td><a href="logout.jsp">Log out</a><td>
-<td>
-<div id= status, class= <%= session.getAttribute("status")+"_a"%>>
-<a href="Admin.jsp">Administrative functions</a>
-</div></td><td>
-<div id= status, class=<%=session.getAttribute("status")+"_b" %>>
-<a href="CustomerRep.jsp">Customer Representative Functions</a>
-</div></td>
+	</table>
+	<br>
 
-</tr>
-</table>
-<br>
-
-<a href="createAuctionForm.jsp">CREATE AUCTION</a> <br>
-<a href="liveauctions.jsp">Advanced Search</a>
-<br>
-<table cellspacing="10">
-<tr>
-<td><a href="EndDate.jsp">Sort by End Date</a></td>
-<td><a href="CurrentPrice.jsp">Sort by Price Lo to Hi</a></td>
-<td><a href="CurrentPriceDesc.jsp">Sort by Price Hi to Lo</a></td>
-</tr>
-<tr>
-<td>Title</td>
-<td>End Date</td>
-<td>Current Price</td>
-<td>Seller</td>
-<td>Item</td>
-<td>Color</td>
-<td>Style</td>
-</tr>
+	<table cellspacing="10">
+	<tr>
+		<td>Alert Name</td>
+		<td>Date</td>
+	</tr>
+	<tr>
+	</tr>
 <%
 	System.out.println(session.getAttribute("userID"));
 	List<String> list = new ArrayList<String>();
