@@ -20,7 +20,7 @@ This allows for users to search for all items of a particular color.
 <td><a href="liveauctions.jsp">Back to Advanced Search</a></td>
 </tr>
 <tr>
-<td>Auction ID</td>
+<td>Title</td>
 <td>End Date</td>
 <td>Current Price</td>
 <td>Item</td>
@@ -35,13 +35,13 @@ This allows for users to search for all items of a particular color.
 	Connection con = db.getConnection();	
 	String searchval=request.getParameter("colsearch");
 	System.out.println(searchval);
-	String query="SELECT * FROM Live_Auction WHERE Live_Auction.item_ID IN (SELECT item_ID FROM Items WHERE Items.color='"+searchval+"');";
+	String query="SELECT * FROM Live_Auction WHERE Live_Auction.end_date>NOW() AND Live_Auction.item_ID IN (SELECT item_ID FROM Items WHERE Items.color='"+searchval+"');";
 	Statement stmt=con.createStatement();
 	ResultSet res=stmt.executeQuery(query);
 	while (res.next()){
 		%>
 		<tr>
-		<td><%=res.getInt("auction_ID")%></td>
+		<td><a href="aucprofile.jsp?value=<%=res.getInt("auction_ID")%>&val2=<%=res.getString("seller")%>"><%=res.getString("title")%></td></a>
 		<td><%=res.getDate("end_date")%></td>
 		<td><%=res.getInt("current_price")%></td>
 		

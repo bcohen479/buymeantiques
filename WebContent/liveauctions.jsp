@@ -48,7 +48,7 @@ There are a number of different links on this page that allow for different sear
 <form name="search bar4" method="post" action="profile.jsp">
 <table>
 <tr>
-<td>Search For a User by UserID</td><td> <input type="text" name="userID"></td>
+<td>Search by Username</td><td> <input type="text" name="userID"></td>
 <td><a href="profile.jsp">Search</a></td>
 </tr>
 </table>
@@ -56,7 +56,7 @@ There are a number of different links on this page that allow for different sear
 <form name="search bar5" method="post" action="aucprofile.jsp">
 <table>
 <tr>
-<td>Search For a Auction by AucID</td><td> <input type="text" name="value"></td>
+<td>Search For a Auction by Title</td><td> <input type="text" name="value"></td>
 <td><a href="aucprofile.jsp">Search</a></td>
 </tr>
 </table>
@@ -64,7 +64,7 @@ There are a number of different links on this page that allow for different sear
 <form name="search bar6" method="post" action="similar.jsp">
 <table>
 <tr>
-<td>Search For Similar Items by Auction ID</td><td> <input type="text" name="aucID2"></td>
+<td>Search For Similar Items by Title</td><td> <input type="text" name="aucID2"></td>
 <td><a href="similar.jsp">Search</a></td>
 </tr>
 </table>
@@ -78,7 +78,7 @@ There are a number of different links on this page that allow for different sear
 <td><a href="CurrentPriceDesc.jsp">Sort by Price Hi to Lo</a></td>
 </tr>
 <tr>
-<td>Auction ID</td>
+<td>Title</td>
 <td>End Date</td>
 <td>Current Price</td>
 <td>Seller</td>
@@ -93,13 +93,13 @@ There are a number of different links on this page that allow for different sear
 	ApplicationDB db = new ApplicationDB();	
 	Connection con = db.getConnection();	
 	
-	String query="SELECT * FROM Live_Auction";
+	String query="SELECT * FROM Live_Auction WHERE end_date>NOW()";
 	Statement stmt=con.createStatement();
 	ResultSet res=stmt.executeQuery(query);
 	while (res.next()){
 		%>
 		<tr>
-		<td><%=res.getInt("auction_ID")%></td>
+		<td><a href="aucprofile.jsp?value=<%=res.getInt("auction_ID")%>&val2=<%=res.getString("seller")%>"><%=res.getString("title")%></td></a>
 		<td><%=res.getDate("end_date")%></td>
 		<td><%=res.getInt("current_price")%></td>
 		<td><%=res.getString("seller")%></td>

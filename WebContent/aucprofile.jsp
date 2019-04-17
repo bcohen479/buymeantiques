@@ -53,7 +53,7 @@ function typeCheck() {
 			System.out.println("id: "+aucID);
 			String seller = request.getParameter("val2");
 			System.out.println(seller);
-			String aucQuery = "SELECT * FROM Live_Auction WHERE auction_ID='"+aucID+"';";
+			String aucQuery = "SELECT * FROM Live_Auction WHERE title='"+aucID+"';";
 			Statement statement = con.createStatement();
 			ResultSet rs = statement.executeQuery(aucQuery);
 			while(rs.next()){

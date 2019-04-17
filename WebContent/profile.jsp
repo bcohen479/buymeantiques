@@ -30,15 +30,16 @@
 	ApplicationDB db = new ApplicationDB();	
 	Connection con = db.getConnection();	
 	String searchval=request.getParameter("userID");
-	String query="SELECT * FROM Bids Where Bids.bidder='"+searchval+"';";
+	String query="SELECT * FROM Bids,Users,Live_Auction WHERE Live_Auction.auction_ID=Bids.auction_ID AND Bids.bidder=Users.user_ID AND Users.user_name='"+searchval+"';";
 	Statement stmt=con.createStatement();
 	ResultSet res=stmt.executeQuery(query);
+	
 	while (res.next()){
 		%>
 		<tr>
-		<td><%=res.getInt("auction_ID")%></td>
-		<td><%=res.getDate("datetime")%></td>
-		<td><%=res.getInt("price")%></td>
+		<td><a href="aucprofile.jsp?value=<%=res.getInt("auction_ID")%>&val2=<%=res.getString("seller")%>"><%=res.getString("title")%></td></a>
+		<td><%=res.getDate("Bids.datetime")%></td>
+		<td><%=res.getInt("Bids.price")%></td>
 	<%
 	}
 	%>
