@@ -13,6 +13,28 @@ This page shows the history of bids for any auction.
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Live Auctions</title>
+
+<script type="text/javascript">
+
+function typeCheck() {
+    if (document.getElementById('jewl').checked) {
+        document.getElementById('ifJewelry').style.display = 'block';
+        document.getElementById('ifTable').style.display = 'none';
+    	document.getElementById('ifChair').style.display = 'none';
+    }else if(document.getElementById('table').checked){
+    	document.getElementById('ifTable').style.display = 'block';
+    	document.getElementById('ifJewelry').style.display = 'none';
+    	document.getElementById('ifChair').style.display = 'none';
+    }
+    else if(document.getElementById('chair').checked){
+    	document.getElementById('ifJewelry').style.display = 'none';
+    	document.getElementById('ifTable').style.display = 'none';
+    	document.getElementById('ifChair').style.display = 'block';
+    }
+
+}
+
+</script>
 </head>
 <body>
 
@@ -97,18 +119,29 @@ This page shows the history of bids for any auction.
 		ApplicationDB d= new ApplicationDB();
 		Connection Conn= d.getConnection();
 		
-		String q="SELECT Users.user_name, Question, Answer FROM Questions JOIN Users ON Questions.Asker=Users.User_ID WHERE Questions.Auction_ID= "+aucID;
+		String q="SELECT Users.user_name, Question, Q_id, Answer FROM Questions JOIN Users ON Questions.Asker=Users.User_ID WHERE Questions.Auction_ID= "+aucID;
 		ResultSet R=stmt.executeQuery(q);
 		
 		while(R.next()){
-		%>
-		<tr>
-		<td><%=R.getString("Users.user_name")%></td>
-		<td><%=R.getString("Question")%></td>
-		<td><%=R.getString("Answer") %>
-		</tr>	
-	<% }%>	
+		int qid=R.getInt("Q_id");
+		String a="";
+		if(R.getString("Answer")!=null){
+			a=R.getString("Answer");
+		}else{
+			if(session.getAttribute("status").equals("customrep")){
+				a="<form method=post, action=postResponse.jsp>"+
+			"<input type=text, name=ans>"+"<input type=\"hidden\", name=\"qid\", value="+qid+"> <input type=\"submit\", value=\"Post Answer!\">";
+			}
+		}
 		
+		
+		out.print("<tr><td>");
+	
+		out.print(R.getString("Users.user_name"));
+		out.print("<td>"+R.getString("Question")+"</td><td>");
+		out.print(a+"</td></tr>");	
+	 }
+		%>
 	
 	
 	

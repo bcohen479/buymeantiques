@@ -26,7 +26,13 @@
 		String query = "SELECT user_ID, password, status FROM Users WHERE user_name = '" + username + "';";
 		
 		ResultSet result = stmt.executeQuery(query);
-		while(result.next()){
+		if(!result.next()){
+		out.print("No account under this username."+
+		"  <a href=login.jsp>Try again</a> or <a href=index.jsp> create new account</a>");
+		}
+			
+		
+		else{
 			String pw = result.getString("password");
 			int id = result.getInt(1);
 			String status= result.getString(3);
@@ -39,6 +45,9 @@
 =======
 			    response.sendRedirect(response.encodeURL("homepage.jsp"));
 >>>>>>> 07c2b9632fd59e10fdfa04ae8aef017ca0e5059f
+			}
+			else{
+				out.print("<a href=login.jsp>Username and Password don't match. Try again </a>");
 			}
 		}
 	}catch (Exception e) {
