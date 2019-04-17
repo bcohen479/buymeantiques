@@ -41,7 +41,7 @@ This allows for users to search for all items of a particular color.
 	while (res.next()){
 		%>
 		<tr>
-		<td><a href="aucprofile.jsp?value=<%=res.getInt("auction_ID")%>&val2=<%=res.getString("seller")%>"><%=res.getString("title")%></td></a>
+		<td><a href="aucprofile.jsp?value=<%=res.getInt("auction_ID")%>&val2=<%=res.getString("seller")%>"><%=res.getString("title")%>></a></td>
 		<td><%=res.getDate("end_date")%></td>
 		<td><%=res.getInt("current_price")%></td>
 		

@@ -17,7 +17,7 @@ Make a user into a Customer Representative.
 	<tr>
 	<td> Email Address </td><td><input type="text" name="email"></td>
 </table>
-<Input type= "submit", value="Make Customer Representative" >
+<Input type= "submit" value="Make Customer Representative" >
 </form>
 
 
