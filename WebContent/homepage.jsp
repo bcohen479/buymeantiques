@@ -148,10 +148,12 @@ display:block;}
 		int price = res.getInt("current_price");
 		%>
 		<tr>
+		
 		<td><a href="aucprofile.jsp?value=<%=aucID%>&val2=<%=seller%>"><%=title%></td></a>
 		<td><%=date %></td>
 		<td><%=price %></td>
 		<td><%=seller %></td>
+		
 		
 	<%
 		String query2="SELECT * FROM Items WHERE Items.item_ID='"+res.getInt("item_ID")+ "';";
