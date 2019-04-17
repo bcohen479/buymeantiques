@@ -12,7 +12,7 @@ This page shows the history of bids for any auction.
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Live Auctions</title>
+<title>Auction Profile</title>
 
 <script type="text/javascript">
 
@@ -49,11 +49,10 @@ function typeCheck() {
 		
 
 		if(aucID != null){
-			//System.out.print("Welcome "+session.getAttribute("userName"));;
 			System.out.println("id: "+aucID);
 			String seller = request.getParameter("val2");
 			System.out.println(seller);
-			String aucQuery = "SELECT * FROM Live_Auction WHERE title='"+aucID+"';";
+			String aucQuery = "SELECT * FROM Live_Auction WHERE auction_ID='"+aucID+"';";
 			Statement statement = con.createStatement();
 			ResultSet rs = statement.executeQuery(aucQuery);
 			while(rs.next()){
@@ -72,6 +71,8 @@ function typeCheck() {
 			}
 			statement.close();
 			rs.close();
+		}else{
+			System.out.println("NULL");
 		}
 	}catch (Exception e) {
 		out.print("Error: "+ e);

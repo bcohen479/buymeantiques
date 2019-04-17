@@ -32,98 +32,33 @@
 	List<String> list = new ArrayList<String>();
 
 	try{
-	ApplicationDB db = new ApplicationDB();	
-	Connection con = db.getConnection();	
+		ApplicationDB db = new ApplicationDB();	
+		Connection con = db.getConnection();	
+		
+		int user = (Integer) session.getAttribute("userID");
+		String username = session.getAttribute("userName").toString();
+		String query="SELECT * FROM Alerts WHERE user_ID = "+user+";";
+		Statement stmt=con.createStatement();
+		ResultSet res=stmt.executeQuery(query);
 	
-	
-	String query="SELECT * FROM Live_Auction";
-	Statement stmt=con.createStatement();
-	ResultSet res=stmt.executeQuery(query);
+		while (res.next()){
+			
+			String alertName = res.getString("name"); 
+			String date = res.getDate("end_date").toString();
+			int auc = res.getInt("auction_ID");
+			
 
-	while (res.next()){
-		//Skip finished auctions
-		Date currdate = new Date();
-		Date aucEnd = res.getDate("end_date");
-		if(aucEnd.before(currdate)){
-			int id = res.getInt("auction_ID");
-			int seller = res.getInt("seller");
-			double price = res.getDouble("current_price");
-			int item = res.getInt("item_ID");
-			List<Integer> finished = new ArrayList<Integer>();
-			String query2 = "SELECT * FROM Complete_Auction";
-			Statement statement = con.createStatement();
-			ResultSet rs = statement.executeQuery(query2);
-			while(rs.next()){
-				finished.add(rs.getInt("auction_ID"));
-			}
-			if(!finished.contains(id)){
-				String getBuyer = "SELECT * FROM Bids WHERE auction_ID = "+id+" AND price="+price+";";
-				Statement buyerState = con.createStatement();
-				ResultSet buyers = buyerState.executeQuery(getBuyer);
-				int buyer = -1;
-				while(buyers.next()){
-					buyer = buyers.getInt("bidder");
-				}
-				String insert = "INSERT INTO Complete_Auction(auction_ID, seller, buyer, item_ID, price, date)"
-						+ "VALUES (?, ?, ?, ?, ?,?)";
-				PreparedStatement ps = con.prepareStatement(insert);
-				
-				java.text.SimpleDateFormat sdf = 
-					     new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			%>
+			<tr>
+			<td><%=alertName%></td>
+			<td><%=auc%></td>
+			<td><%=date %></td>
 
-				String currentTime = sdf.format(aucEnd);
-				ps.setInt(1, id);
-				ps.setInt(2, seller);
-				ps.setInt(3, buyer);
-				ps.setInt(4, item);
-				ps.setDouble(5, price);
-				ps.setString(6, currentTime);
-				
-				ps.executeUpdate();
-				
-				ps.close();
-			}
-			statement.close();
-			continue;
-		}
 		
-		int id = res.getInt("seller");
-		
-		String getUser="SELECT user_name FROM Users WHERE Users.user_ID='"+id+"';";
-		Statement stmt3=con.createStatement();
-		ResultSet resu=stmt3.executeQuery(getUser);
-		String seller = "NA";
-		while(resu.next()){
-			seller = resu.getString("user_name");
-		}
-		int aucID = res.getInt("auction_ID");
-		String title = res.getString("title");
-		String date = res.getDate("end_date").toString();
-		int price = res.getInt("current_price");
-		%>
-		<tr>
-		<td><a href="aucprofile.jsp?value=<%=aucID%>&val2=<%=seller%>"><%=title%></td></a>
-		<td><%=date %></td>
-		<td><%=price %></td>
-		<td><%=seller %></td>
-		
-	<%
-		String query2="SELECT * FROM Items WHERE Items.item_ID='"+res.getInt("item_ID")+ "';";
-		Statement stmt2=con.createStatement();
-		ResultSet res2=stmt2.executeQuery(query2);
-		while (res2.next()){
-		%>
-		<td><%=res2.getString("name")%></td>
-		<td><%=res2.getString("color")%></td>
-		<td><%=res2.getString("style")%></td>
-		</tr>
-		<%
-		}
-	}
-	%>
-	</table>
-	<%res.close();
-	stmt.close();
+		</table>
+		<% }
+		res.close();
+		stmt.close();
 	}catch (Exception e) {
 		out.print("Error: "+ e);
 	}
