@@ -41,8 +41,11 @@ display:block;}
 <tr>
 
 <td><a href="profile.jsp">Profile</a></td>
+<<<<<<< HEAD
  <td><a href="alerts.jsp">Alerts    </a> </td>
  <td><a href="logout.jsp">Log out</a><td>
+=======
+>>>>>>> parent of 07c2b96... Added logout link to homepage
  <td><a href="#">Alerts    </a> </td>
 <td>
 <div id= status, class= <%= session.getAttribute("status")+"_a"%>>
