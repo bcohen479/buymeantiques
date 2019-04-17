@@ -42,6 +42,7 @@ display:block;}
 
 <td><a href="profile.jsp">Profile</a></td>
  <td><a href="#">Alerts    </a> </td>
+ <td><a href="logout.jsp">Log out</a><td>
 <td>
 <div id= status, class= <%= session.getAttribute("status")+"_a"%>>
 <a href="Admin.jsp">Administrative functions</a>
