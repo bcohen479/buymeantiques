@@ -8,7 +8,7 @@
 <title>Create Customer Representative Account</title>
 </head>
 <body>
-Make a user into a Customer Representative
+Make a user into a Customer Representative.
 <form method="post" action="MakeCustomRep.jsp">
 <table>
 	<tr>    

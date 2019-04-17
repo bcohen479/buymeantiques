@@ -13,6 +13,7 @@ Welcome Administrator!
 
 <a href= "CreateCustomerRep.jsp">Create Customer Representative Account</a>
 
+<br>
 
 <a href="GenerateSalesReport.jsp">Generate Sales Report</a>
 
