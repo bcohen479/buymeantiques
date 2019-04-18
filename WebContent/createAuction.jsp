@@ -68,7 +68,6 @@
 			ps.setString(5, itemColor);
 			ps.setString(6, "");
 			
-			System.out.println("WORKING2\n");
 			
 			String insertItemType = "INSERT INTO Jewelry(item_ID, weight)" + "VALUES (?, ?)";
 			if(itemType.matches("Tables")){
@@ -77,7 +76,6 @@
 				insertItemType = "INSERT INTO Chairs(item_ID, height)" + "VALUES (?, ?)";
 			}
 			PreparedStatement ps2 = con.prepareStatement(insertItemType);
-			System.out.println("WORKING3\n");
 
 			ps2.setInt(1, itemId);
 			ps2.setString(2, "");

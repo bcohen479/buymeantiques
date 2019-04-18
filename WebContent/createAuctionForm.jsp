@@ -64,14 +64,14 @@ Add Auction details...
 		<td>Manufacturer</td><td><input type="text" name="itemManufacturer"></td>
 	</tr>
 	<tr>
-		<td>Manufacturing Year</td><td><input type="text" name="itemDate"></td>
+		<td>Manufacturing Year</td><td><input type="text" required pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" name="itemDate" placeholder="YYYY-MM-DD"></td>
 	</tr>
 	<tr>
 		<td>Color</td><td><input type="color" name="itemColor"></td>
 	</tr>
 	</tr>
 	<tr>
-		<td>End Date</td><td><input type="datetime-local" name="auc_end" required></td>
+		<td>End Date</td><td><input type="datetime-local" required pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" name="auc_end" required placeholder="YYYY-MM-DD"></td>
 	</tr>
 	<tr>
 		<td>Set Starting Price</td><td><input type="number" name="auc_startingPrice" value = "0.00" step="any" required></td>
