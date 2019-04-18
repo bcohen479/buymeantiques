@@ -31,19 +31,28 @@
 			
 			//if()
 			int aid= Integer.parseInt(request.getParameter("aucID"));
+			System.out.println(aid);
 			if(request.getParameter("remove")!=null){
 				String sql = "DELETE FROM Live_Auction WHERE auction_ID= ?";
 
 				PreparedStatement ps = con.prepareStatement(sql);
 				ps.setInt(1,aid);
 				ps.executeUpdate();
+				out.print("<tr>Auction has been removed.  <a href='DisplayAuctionsAsTable.jsp?f="+request.getParameter("field")+
+						"&attribute="+request.getParameter("val")+"'>Go Back</a>");
 			}else{
 			if(request.getParameter("showbids")!=null){
+				//out.print();
 				String query="Select * From Bids where auction_ID="+aid;
 				Statement smt= con.createStatement();
 				ResultSet r= smt.executeQuery(query);
-				out.print("<form method='post' action='Editbids.jsp'>");
 				out.print("<table>");
+				out.print("<tr><td><h1> Bids for Auction #"+aid+"</h1></td>");
+				out.print("<td><a href='DisplayAuctionsAsTable.jsp?f="+request.getParameter("field")+
+						"&attribute="+request.getParameter("val")+"'>Go Back</a></td></tr>");
+			
+				out.print("<form method='post' action='Editbids.jsp'>");
+				
 				out.print("<tr>");
 				out.print("<td> Select </td>");
 				out.print("<td> Bidder ID </td>");
@@ -80,32 +89,34 @@
 				out.print("<td>");
 				out.print("<button type='submit' name='newbid'> Change Bid </button>");
 				out.print("</td></tr>");
-				
+				out.print("</table><table");
 				out.print("<tr>");
 				out.print("<button type='submit' name='remove' value='remove'> Delete selected Bid </button>");
 				out.print("</tr>");
 				out.print("</form>");
 				
 				
-				out.print("</form>");
+				out.print("</table");
 			}else{
-			String changeField= request.getParameter("field");
-			//out.print(changeField);
+			String changeField= request.getParameter("changefield");
+			System.out.println(changeField);
 			//String operation= request.getParameter();
 			//String strng= "Update Users Set password='"+request.getParameter("updated")+"' WHERE User_ID= "+uid;
 			PreparedStatement ps=con.prepareStatement("Update Live_Auction Set "+ changeField+ "= ? WHERE auction_ID= ?");
 			
 			
 			String s= request.getParameter("updated");
-			//out.print(s);
+			System.out.println(s);
 			ps.setString(1,s);
 			
 			ps.setInt(2, aid);
 			ps.executeUpdate();
 			ps.close();
 			
-	out.print("successfully Updated");
-	out.print("<a href= editAuction.jsp> Return to menu </a>");
+	out.print("successfully updated.   ");
+	out.print("<tr><a href='DisplayAuctionsAsTable.jsp?f="+request.getParameter("field")+
+			"&attribute="+request.getParameter("val")+"'>Go Back</a>");
+	
 			}
 		con.close();
 		

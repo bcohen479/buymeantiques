@@ -13,8 +13,10 @@
 			ApplicationDB db = new ApplicationDB();	
 			Connection con = db.getConnection();		
 			Statement stmt = con.createStatement();
+			
 			String val = request.getParameter("attribute");
 			String field=request.getParameter("f");
+			//out.print(field);
 			//Make a SELECT query from the table specified by the 'command' parameter at the index.jsp
 			String str = "SELECT * FROM Live_Auction WHERE "+field+"= '"+val+ "'";			
 			
@@ -24,10 +26,12 @@
 			//out.print(result.getInt("auction_ID"));
 			//Make an HTML table to show the results in:
 		if(res.next()){
+			
 			ResultSet result=stmt.executeQuery(str);
 		
 			out.print("<form method='post' action='findandEditAuction.jsp'>");
 			out.print("<table>");
+			out.print("<tr><h3>Search Results</h3></tr>");
 
 			//make a row
 			out.print("<tr>");
@@ -43,7 +47,6 @@
 			out.print("</td>");
 			//make a column
 			out.print("<td>");
-			//depending on the radio button selection make a column header for Manufacturer if the beers table was selected and Address if the bars table was selected
 			out.print("Title");
 			out.print("</td>");
 			out.print("<td>");
@@ -54,8 +57,8 @@
 			out.print("</td>");
 			
 			out.print("</tr>");
-		
 			
+			out.print("<tr>");
 			
 			
 
@@ -65,7 +68,7 @@
 			while (result.next()) {
 				//make a row
 				
-				out.print("<tr>");
+				//out.print("<tr>");
 				out.print("<td>");
 				out.print("<input type='radio' name=aucID value="+result.getInt("auction_ID")+" required>");
 				out.print("</td>");
@@ -94,24 +97,30 @@
 				
 				out.print("</tr>");
 			}
+			out.print("</table><br>");
+			out.print("<table>");
+			out.print("<tr>");
 			
+			out.print("<input type='hidden', name='field' value="+field+">");
+			out.print("<input type='hidden', name='val' value="+val+">");
 			
-		
-			
-			out.print("<br><br><br>");
-			out.print("<tr><td>");
-			out.print("<button type='submit' name='remove' value='remove'> Delete selected Auction </button><br>");
+			out.print("<td><button type='submit' name='remove' value='remove'> Delete selected Auction </button>   ");
 			out.print("</td><td>");
 			out.print("<button type='submit' name='showbids' value='showbids'> Show and Edit bids for this Auction</button>");
+			
+		
 			out.print("</td></tr>");
-			out.print("<br><br><br>");
+			out.print("</table><table>");
+			//out.print("<tr>");
+			
+			//out.print("</td></tr>");
 			
 			out.print("<tr>");
+			
+			
 			out.print("<td>");
-			out.print("Select Field to Change");
-			out.print("</td>");
-			out.print("<td>");
-			out.print("<select name='field' size=1>");
+			out.print("Select Field to Change: ");
+			out.print("<select name='changefield' size=1>"); 
 			out.print("<option value='title'>Title</option>");
 			out.print("<option value='description'>Description</option>");
 			out.print("<option value='end_date'>End date</option>");
@@ -123,7 +132,7 @@
 			
 			out.print("<td>");
 			
-			out.print("Enter new value");
+			out.print("Enter new value:  ");
 			out.print("</td>");
 			out.print("<td>");
 			out.print("<input type='text' name='updated'>");
@@ -135,18 +144,13 @@
 			out.print("</button>");
 			out.print("</td>");
 			out.print("</tr>");
-
 			
 			
-		
-			
-		
-		
 			//out.print("<input type='submit' value='submit'>");
 			out.print("</table>");
 			out.print("</form>");
 }else{
-	out.print("<a href=editAuction.jsp> No auctions matching your search were found.  Please try again </a>");}
+	out.print("<a href=CustomerRep.jsp> No auctions matching your search were found.  Please try again </a>");}
 
 			
 			//close the connection.
