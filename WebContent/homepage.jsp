@@ -43,8 +43,7 @@ display:block;}
 <td><a href="profile.jsp">Profile</a></td>
  <td><a href="alerts.jsp">Alerts    </a> </td>
  <td><a href="logout.jsp">Log out</a><td>
-
- <td><a href="#">Alerts    </a> </td>
+ <td><a href="alerts.jsp">Alerts    </a> </td>
 <td>
 <div id= status, class= <%= session.getAttribute("status")+"_a"%>>
 <a href="Admin.jsp">Administrative functions</a>
@@ -152,7 +151,7 @@ display:block;}
 		%>
 		<tr>
 		
-		<td><a href="aucprofile.jsp?value=<%=aucID%>&val2=<%=seller%>"><%=title%></td></a>
+		<td><a href="aucprofile.jsp?value=<%=aucID%>&val2=<%=seller%>"><%=title%></a></td>
 		<td><%=date %></td>
 		<td><%=price %></td>
 		<td><%=seller %></td>

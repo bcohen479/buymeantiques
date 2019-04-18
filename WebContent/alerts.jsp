@@ -23,6 +23,7 @@
 	<table cellspacing="10">
 	<tr>
 		<td>Alert Name</td>
+		<td>Auction ID</td>
 		<td>Date</td>
 	</tr>
 	<tr>
@@ -44,16 +45,17 @@
 		while (res.next()){
 			
 			String alertName = res.getString("name"); 
-			String date = res.getDate("end_date").toString();
-			int auc = res.getInt("auction_ID");
-			
+/* 			String date = res.getDate("end_date").toString();
+ */			int auc = res.getInt("auction_ID");
+ 			System.out.println(alertName);
+			System.out.println("auc:" + auc);
 
 			%>
 			<tr>
 			<td><%=alertName%></td>
-			<td><%=auc%></td>
-			<td><%=date %></td>
-
+			<td><a href="aucprofile.jsp?value=<%=auc%>"><%=auc%></a></td>
+<%-- 			<td><%=date %></td>
+ --%>
 		
 		</table>
 		<% }

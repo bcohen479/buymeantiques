@@ -50,9 +50,8 @@ function typeCheck() {
 
 		if(aucID != null){
 			System.out.println("id: "+aucID);
-			String seller = request.getParameter("val2");
-			System.out.println(seller);
-			String aucQuery = "SELECT * FROM Live_Auction WHERE auction_ID='"+aucID+"';";
+/* 			String seller = request.getParameter("val2");
+ */			String aucQuery = "SELECT * FROM Live_Auction JOIN Users ON seller = user_ID WHERE auction_ID='"+aucID+"';";
 			Statement statement = con.createStatement();
 			ResultSet rs = statement.executeQuery(aucQuery);
 			while(rs.next()){
@@ -61,8 +60,8 @@ function typeCheck() {
 				<br>
 				<br>
 				<p>Description : <%=rs.getString("description") %></p>
-				<tr><a href="placebid.jsp?aucID=<%=aucID%>&aucTitle=<%=rs.getString("title")%>"><h5>PLACE BID</h5></a>
-				<tr><td>Seller: <%=seller%></td></tr>
+				<tr><td><a href="placebid.jsp?aucID=<%=aucID%>&aucTitle=<%=rs.getString("title")%>"><h5>PLACE BID</h5></a></td></tr>
+				<tr><td>Seller: <%=rs.getString("user_name")%></td></tr>
 				<tr><td>Current Price: $<%=rs.getInt("current_price") %></td></tr>
 				<tr><td>End Date: <%=rs.getDate("end_date").toString()%></td></tr>
 				<%-- <tr><td>Description : <%=rs.getString("description") %></td></tr> --%>
