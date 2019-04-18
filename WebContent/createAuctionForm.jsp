@@ -67,7 +67,7 @@ Add Auction details...
 		<td>Manufacturing Year</td><td><input type="text" required pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" name="itemDate" placeholder="YYYY-MM-DD"></td>
 	</tr>
 	<tr>
-		<td>Color</td><td><input type="color" name="itemColor"></td>
+		<td>Color</td><td><input type="text" name="itemColor"></td>
 	</tr>
 	</tr>
 	<tr>
