@@ -3,7 +3,7 @@
 <!--Import some libraries that have classes that we need -->
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
-<%@ page import="java.util.Date, java.text.*, java.time.format.DateTimeFormatter.*" %>
+<%@ page import="java.util.Date, java.text.*, java.time.format.DateTimeFormatter.*, java.util.Calendar" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -78,6 +78,7 @@ display:block;}
 	System.out.println(session.getAttribute("userID"));
 
 	List<String> list = new ArrayList<String>();
+	Calendar c = Calendar.getInstance();
 
 	try{
 	ApplicationDB db = new ApplicationDB();	
@@ -92,6 +93,9 @@ display:block;}
 		//Skip finished auctions
 		Date currdate = new Date();
 		Date aucEnd = res.getDate("end_date");
+		c.setTime(aucEnd);
+		c.add(Calendar.DAY_OF_MONTH, 1);
+		Date e = c.getTime();
 		if(aucEnd.before(currdate)){
 			int id = res.getInt("auction_ID");
 			int seller = res.getInt("seller");
@@ -118,14 +122,14 @@ display:block;}
 				
 				java.text.SimpleDateFormat sdf = 
 					     new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
+				
 				String currentTime = sdf.format(aucEnd);
 				ps.setInt(1, id);
 				ps.setInt(2, seller);
 				ps.setInt(3, buyer);
 				ps.setInt(4, item);
 				ps.setDouble(5, price);
-				ps.setString(6, currentTime);
+				ps.setString(6, aucEnd.toString());
 				
 				ps.executeUpdate();
 				
@@ -152,7 +156,7 @@ display:block;}
 		<tr>
 		
 		<td><a href="aucprofile.jsp?value=<%=aucID%>&val2=<%=seller%>"><%=title%></a></td>
-		<td><%=date %></td>
+		<td><%=e.toString() %></td>
 		<td><%=price %></td>
 		<td><%=seller %></td>
 		
