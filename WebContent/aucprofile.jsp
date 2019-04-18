@@ -34,13 +34,15 @@ function typeCheck() {
 
 }
 
+
+
 </script>
 </head>
 <body>
 
 <table cellspacing="5" style="table-layou:fixed">
 <%
-	List<String> auction = new ArrayList<String>();
+	List<Integer> auction = new ArrayList<Integer>();
 	String aucID = request.getParameter("value");
 	
 	try{
@@ -52,21 +54,39 @@ function typeCheck() {
 			System.out.println("id: "+aucID);
 /* 			String seller = request.getParameter("val2");
  */			String aucQuery = "SELECT * FROM Live_Auction JOIN Users ON seller = user_ID WHERE auction_ID='"+aucID+"';";
+ 			String compAuc = "SELECT * FROM Complete_Auction;";
 			Statement statement = con.createStatement();
 			ResultSet rs = statement.executeQuery(aucQuery);
+			Statement s = con.createStatement();
+			ResultSet ds = s.executeQuery(compAuc);
 			while(rs.next()){
+				while(ds.next()){
+					auction.add(ds.getInt("auction_ID"));
+					System.out.print(ds.getInt("auction_ID"));
+				}
+
 				%>
 				<tr><h3><%=rs.getString("title")%></h3></tr>
 				<br>
 				<br>
 				<p>Description : <%=rs.getString("description") %></p>
-				<tr><td><a href="placebid.jsp?aucID=<%=aucID%>&aucTitle=<%=rs.getString("title")%>"><h5>PLACE BID</h5></a></td></tr>
+				<tr><td id="bidbutton" style=""><h5><a id="bidbutton" href="placebid.jsp?aucID=<%=aucID%>&aucTitle=<%=rs.getString("title")%>">PLACE BID</a></h5></td></tr>
 				<tr><td>Seller: <%=rs.getString("user_name")%></td></tr>
 				<tr><td>Current Price: $<%=rs.getInt("current_price") %></td></tr>
 				<tr><td>End Date: <%=rs.getDate("end_date").toString()%></td></tr>
 				<%-- <tr><td>Description : <%=rs.getString("description") %></td></tr> --%>
 				
 			<%
+				if(auction.contains(Integer.parseInt(aucID))){
+					System.out.println("CALLED");
+					%>
+					<script>
+					function endCheck() {
+						document.getElementByID('bidbutton').style.display = 'none';
+					}
+					</script>
+					<% 
+				}
 			}
 			statement.close();
 			rs.close();
@@ -148,9 +168,9 @@ function typeCheck() {
 	</table>
 	<br>
 	<form method=post, action="askQuestion.jsp">
-	 Post Question <input type="text", name="q"> 
-	 <input type="hidden", name="auctionID", value=<%=aucID %> display>
-	<input type="submit", value="submit">
+	 Post Question <input type="text" name="q"> 
+	 <input type="hidden" name="auctionID" value=<%=aucID %> display>
+	<input type="submit" value="submit">
 	</form>
 	
 	<% res.close();

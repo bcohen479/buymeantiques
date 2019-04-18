@@ -44,12 +44,6 @@ Add Auction details...
 	<tr>
 		<td>Item Type</td>
 		<td>
-<!-- 			<input list="Item_Types" name="itemType">
-			  <datalist id="types">
-			    <option value="Chair">
-			    <option value="Jewelry">
-			    <option value="Table">
-			  </datalist> -->
 			  <input type="radio" onclick="javascript:typeCheck();" name="itemType" value="Chairs" id="chair">Chair<br>
 			  <input type="radio" onclick="javascript:typeCheck();" name="itemType" value="Tables" id="table">Table<br>
 			  <input type="radio" onclick="javascript:typeCheck();" name="itemType" value="Jewelry" id="jewl" >Jewelry<br>
