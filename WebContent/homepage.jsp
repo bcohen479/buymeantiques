@@ -156,7 +156,7 @@ display:block;}
 		<tr>
 		
 		<td><a href="aucprofile.jsp?value=<%=aucID%>&val2=<%=seller%>"><%=title%></a></td>
-		<td><%=e.toString() %></td>
+		<td><%=aucEnd.toString() %></td>
 		<td><%=price %></td>
 		<td><%=seller %></td>
 		
