@@ -71,7 +71,7 @@ Add Auction details...
 	</tr>
 	</tr>
 	<tr>
-		<td>End Date</td><td><input type="datetime-local" required pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" name="auc_end" required placeholder="YYYY-MM-DD"></td>
+		<td>End Date</td><td><input type="text" required pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" name="auc_end" required placeholder="YYYY-MM-DD"></td>
 	</tr>
 	<tr>
 		<td>Set Starting Price</td><td><input type="number" name="auc_startingPrice" value = "0.00" step="any" required></td>
