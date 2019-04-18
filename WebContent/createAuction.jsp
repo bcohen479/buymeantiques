@@ -25,7 +25,7 @@
 			String itemType = request.getParameter("itemType");
 			String itemName = request.getParameter("itemName");
 			String itemManufacturer = request.getParameter("itemManufacturer");
-			String itemYear = request.getParameter("itemDate")+"-01-01";
+			String itemYear = request.getParameter("itemDate");
 			String itemColor = request.getParameter("itemColor");
 			int itemId = 1;
 			String query2 = "SELECT MAX(item_ID) FROM Items;";
