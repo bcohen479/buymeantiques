@@ -67,6 +67,7 @@
 					ps.executeUpdate();
 				    session.setAttribute("userID", id);
 					session.setAttribute("userName", username);
+					session.setAttribute("status", "enduser");
 				    response.sendRedirect(response.encodeURL("success.jsp"));}
 				catch(SQLException ex){
 				    	
