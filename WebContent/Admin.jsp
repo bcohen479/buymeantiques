@@ -15,9 +15,7 @@ Welcome Administrator!
 
 <br>
 
-<a href="GenerateSalesReport.jsp">Generate Sales Report</a>
-
-
+<a href="Reporting.jsp">Generate Sales Report</a>
 
 
 </body>

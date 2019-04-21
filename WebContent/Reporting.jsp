@@ -1,81 +1,120 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
+    pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
-<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Generate Report | BuyMeAntiques</title>
 </head>
 <body>
-	<%
-		List<String> list = new ArrayList<String>();
+<script type="text/javascript">
 
-		try {
+function ReportType() {
+    if (document.getElementById('bs').checked) {
+        document.getElementById('EP').style.display = 'block';
+        document.getElementById('BS').style.display = 'none';
+    	
+    }else if(document.getElementById('ep').checked){
+    	document.getElementById('BS').style.display = 'block';
+    	document.getElementById('EP').style.display = 'none';
+    }
 
-			//Get the database connection
-			ApplicationDB db = new ApplicationDB();	
-			Connection con = db.getConnection();	
-			
-			//Create a SQL statement
-			Statement stmt = con.createStatement();
-			//Get the combobox from the index.jsp
-			String entity = request.getParameter("attr");
-			//Make a SELECT query from the sells table with the price range specified by the 'price' parameter at the index.jsp
-			String str = "SELECT * FROM sells WHERE price <= " + entity;
-			//Run the query against the database.
-			ResultSet result = stmt.executeQuery(str);
+}
 
-			//Make an HTML table to show the results in:
-			out.print("<table>");
+</script>
+<table><tr><h1>Generate Report</h1></tr></table>
+<br>
 
-			//make a row
-			out.print("<tr>");
-			//make a column
-			out.print("<td>");
-			//print out column header
-			out.print("bar");
-			out.print("</td>");
-			//make a column
-			out.print("<td>");
-			out.print("beer");
-			out.print("</td>");
-			//make a column
-			out.print("<td>");
-			out.print("price");
-			out.print("</td>");
-			out.print("</tr>");
+<form method="post" action="GenerateSalesReport.jsp">
+	<table>
+	<tr><h3>
+		Report Type
+		</h3>
+	</tr>
+	<br>
+	<tr>
+		
+			  <input type="radio" onclick="javascript:ReportType();" name="reportType" value="BestSelling" id="bs" required>Top Preforming<br>
+			  <input type="radio" onclick="javascript:ReportType();" name="reportType" value="EarningsPer" id="ep" required>Earnings Per<br>
+		
+	</tr>
+	</table>
+	
+	
+<table id="EP" style="display: none">
 
-			//parse out the results
-			while (result.next()) {
-				//make a row
-				out.print("<tr>");
-				//make a column
-				out.print("<td>");
-				//Print out current bar name:
-				out.print(result.getString("bar"));
-				out.print("</td>");
-				out.print("<td>");
-				//Print out current beer name:
-				out.print(result.getString("beer"));
-				out.print("</td>");
-				out.print("<td>");
-				//Print out current price
-				out.print(result.getString("price"));
-				out.print("</td>");
-				out.print("</tr>");
+<tr><td>Field to Report on: <td> </tr>
+<tr><td>
 
-			}
-			out.print("</table>");
+<select name="attr" size=1>
+			<option value="name AS Item">Item</option>
+			<option value="Users.user_name AS seller">Seller</option>
+			<option value="Users.user_name AS buyer">Buyer</option>
+		</select>
+		</td>
+</tr>
 
-			//close the connection.
-			con.close();
+<tr>
+	<td>Rank By: </td>
+	<td>
+		<select name="sort" size=1>
+			<option value="sum(Complete_Auction.price) AS 'Revenue'">Revenue Generated/Amount Spent</option>
+			<option value="AVG(Complete_Auction.price) AS 'Average'">Average Price Per Sale</option>
+			<option value="COUNT(Complete_Auction.Auction_ID) AS 'Sales'">Number of Sales</option></select>
+	</td>
+</tr>
 
-		} catch (Exception e) {
-		}
-	%>
+
+<tr><td>Number of results to display: </td>
+<td><select name="quant">
+		<option value=1>1</option>
+		<option value=2>2</option>
+		<option value=3>3</option>
+		<option value=5>5</option>
+		<option value=10>10</option>
+		<option value=20>20</option>
+		<option value="No">No Limit</option>
+
+	</select></td></tr>
+<tr><td><input type="submit" value="submit"></td></tr>
+</table>
+
+
+<table id="BS" style="display: none">
+
+<tr><td>Field to report on</td> </tr>
+<tr>
+<td>
+<select name="reporton" size=1>
+			<option value="name AS Item">Item</option>
+			<option value="Users.user_name AS Seller">Seller</option>
+			<option value="Items.Item_ID">Item type</option>
+		</select>
+		</td>
+</tr>
+
+<tr>
+		<td>Fields to include in report:</td>
+		<td>
+		<input type="checkbox" name="exField[]" value="sum(Complete_Auction.price) AS Earnings"> Earnings<br>
+  		<input type="checkbox" name="exField[]" value="AVG(Complete_Auction.price) AS Average"> Average Price Per Sale<br>
+ 		 <input type="checkbox" name="exField[]", value="COUNT(Complete_Auction.Auction_ID) AS Sales">Number of Sales</br>
+		</td>
+		</tr>
+<tr>
+		<td>
+		Include Breakdown By (optional):</td><td>
+		<input type="radio", name="GroupBy", value="time">Month
+		<input type="radio", name="GroupBy", value=ItemType>Item Type
+		</td></tr>
+<tr>
+<td>
+
+<input type="radio", name="TotalEarnings", value=1> Display totals for BuyMeAntiques?</td></tr>
+<tr><td><input type="submit" value="submit"></td></tr>
+</table>
 
 </body>
 </html>
