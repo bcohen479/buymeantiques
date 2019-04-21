@@ -52,13 +52,13 @@ Add Auction details...
 		<td>Item Name</td><td><input type="text" name="itemName" required></td>
 	</tr>
 	<tr id="ifJewelry" style="display: none" >
-		<td>Weight(g): </td>	<td><input type="text" name="itemSpec"></td>
+		<td>Weight(g): </td>	<td><input type="text" name="jewlWeight"></td>
 	</tr>
 	<tr id="ifChair" style="display: none">
-		<td>Height(ft): </td>	<td><input type="text" name="itemSpec"></td>
+		<td>Height(ft): </td>	<td><input type="text" name="chairHeight"></td>
 	</tr>
 	<tr id="ifTable" style="display: none">
-		<td>Dimensions(ft x ft x ft): </td>	<td><input type="text" name="itemSpec"></td>
+		<td>Dimensions(ft x ft x ft): </td>	<td><input type="text" name="tableDim"></td>
 	</tr>
 	<tr>
 		<td>Manufacturer</td><td><input type="text" name="itemManufacturer" required></td>

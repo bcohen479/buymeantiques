@@ -27,7 +27,7 @@
 			String itemManufacturer = request.getParameter("itemManufacturer");
 			String itemYear = request.getParameter("itemDate");
 			String itemColor = request.getParameter("itemColor");
-			String itemSpec = request.getParameter("itemSpec");
+			String itemSpec = request.getParameter("jewlWeight");
 			int itemId = 1;
 			String query2 = "SELECT MAX(item_ID) FROM Items;";
 			ResultSet iid = stmt.executeQuery(query2);
@@ -73,8 +73,10 @@
 			String insertItemType = "INSERT INTO Jewelry(item_ID, weight)" + "VALUES (?, ?)";
 			if(itemType.matches("Tables")){
 				insertItemType = "INSERT INTO Tables(item_ID, dimensions)" + "VALUES (?, ?)";
+				itemSpec = request.getParameter("tableDim");
 			}else if(itemType.matches("Chairs")){
 				insertItemType = "INSERT INTO Chairs(item_ID, height)" + "VALUES (?, ?)";
+				itemSpec = request.getParameter("chairHeight");
 			}
 			PreparedStatement ps2 = con.prepareStatement(insertItemType);
 
