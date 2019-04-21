@@ -52,13 +52,13 @@ Add Auction details...
 		<td>Item Name</td><td><input type="text" name="itemName" required></td>
 	</tr>
 	<tr id="ifJewelry" style="display: none" >
-		<td>Weight(g): </td>	<td><input type="text" name="jewlWeight"></td>
+		<td>Weight(g): </td>	<td><input type="text" name="itemSpec"></td>
 	</tr>
 	<tr id="ifChair" style="display: none">
-		<td>Height(ft): </td>	<td><input type="text" name="chairHeight"></td>
+		<td>Height(ft): </td>	<td><input type="text" name="itemSpec"></td>
 	</tr>
 	<tr id="ifTable" style="display: none">
-		<td>Dimensions(ft x ft x ft): </td>	<td><input type="text" name="tableDim"></td>
+		<td>Dimensions(ft x ft x ft): </td>	<td><input type="text" name="itemSpec"></td>
 	</tr>
 	<tr>
 		<td>Manufacturer</td><td><input type="text" name="itemManufacturer" required></td>
@@ -68,7 +68,6 @@ Add Auction details...
 	</tr>
 	<tr>
 		<td>Color</td><td><input type="text" name="itemColor" required></td>
-	</tr>
 	</tr>
 	<tr>
 		<td>End Date</td><td><input type="text" required pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" name="auc_end" required placeholder="YYYY-MM-DD"></td>

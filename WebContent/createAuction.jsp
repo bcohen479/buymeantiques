@@ -27,6 +27,7 @@
 			String itemManufacturer = request.getParameter("itemManufacturer");
 			String itemYear = request.getParameter("itemDate");
 			String itemColor = request.getParameter("itemColor");
+			String itemSpec = request.getParameter("itemSpec");
 			int itemId = 1;
 			String query2 = "SELECT MAX(item_ID) FROM Items;";
 			ResultSet iid = stmt.executeQuery(query2);
@@ -78,7 +79,7 @@
 			PreparedStatement ps2 = con.prepareStatement(insertItemType);
 
 			ps2.setInt(1, itemId);
-			ps2.setString(2, "");
+			ps2.setString(2, itemSpec);
 			//Run the query against the DB
  			try{
 				ps.executeUpdate();
