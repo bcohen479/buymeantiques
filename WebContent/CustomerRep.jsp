@@ -44,7 +44,8 @@ Select field to change:
 <form method="post" action= "DisplayAuctionsAsTable.jsp">
 		<select name="f" size=1>
 			<option value="auction_ID"> Auction ID</option>
-			<option value="seller">Seller</option>
+			<option value="seller">Seller ID</option>
+			<option value="user_name">Seller Username</option>
 			<option value="item_ID">Item ID</option>
 			<option value="title"> Name </option>
 		</select> as search criteria <br></tr><tr>

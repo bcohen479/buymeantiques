@@ -107,7 +107,7 @@ function ReportType() {
 		<td>
 		Include Breakdown By (optional):</td><td>
 		<input type="radio", name="GroupBy", value="time">Month
-		<input type="radio", name="GroupBy", value=ItemType>Item Type
+		<!-- <input type="radio", name="GroupBy", value=ItemType>Item Type -->
 		</td></tr>
 <tr>
 <td>

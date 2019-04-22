@@ -17,21 +17,20 @@
 		List<String> list = new ArrayList<String>();
 		try {
 
-			//Get the database connection
+			
 			ApplicationDB db = new ApplicationDB();	
 			Connection con = db.getConnection();	
 			
-			//Create a SQL statement
 			Statement stmt = con.createStatement();
-			
-			//String changefield=request.getParameter();
-					
-			
-			//ResultSet result = stmt.executeQuery(str);
-			
-			//if()
+		
 			int aid= Integer.parseInt(request.getParameter("aucID"));
-			System.out.println(aid);
+			String checkclosed="Select * FROM Complete_Auction Where Auction_ID="+aid;
+			ResultSet rs=stmt.executeQuery(checkclosed);
+			if(rs.next()){
+				out.print("This Auction is closed and cannot be edited.  <a href='DisplayAuctionsAsTable.jsp?f="+request.getParameter("field")+
+						"&attribute="+request.getParameter("val")+"'>Go Back</a>");
+			}else{
+			//System.out.println(aid);
 			if(request.getParameter("remove")!=null){
 				String sql = "DELETE FROM Live_Auction WHERE auction_ID= ?";
 
@@ -120,7 +119,7 @@
 			}
 		con.close();
 		
-		} }catch (Exception e) {
+			}} }catch (Exception e) {
 			out.print("Error: "+ e);
 		}
 	%>

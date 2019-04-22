@@ -6,6 +6,26 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Display results</title>
+<script type="text/javascript"> 
+function myfunction(){
+
+var y=document.getElementById("nextPart");
+y.style.display = "block";
+var x = document.getElementById("mySelect").selectedIndex;
+
+if(x===3){
+
+document.getElementById("updateval").type = "number";
+}
+
+if(x===2){
+document.getElementById("updateval").pattern = "[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])";
+document.getElementById("updateval").placeholder="YYYY-MM-DD";
+}
+
+}
+</script>
+
 </head>
 <body>
 <% try {
@@ -13,58 +33,28 @@
 			ApplicationDB db = new ApplicationDB();	
 			Connection con = db.getConnection();		
 			Statement stmt = con.createStatement();
-			
 			String val = request.getParameter("attribute");
 			String field=request.getParameter("f");
 			//out.print(field);
 			//Make a SELECT query from the table specified by the 'command' parameter at the index.jsp
-			String str = "SELECT * FROM Live_Auction WHERE "+field+"= '"+val+ "'";			
+			String str = "SELECT * FROM Live_Auction JOIN Users ON Live_Auction.seller=Users.user_ID WHERE "+field+"='"+val+ "'";			
 			
 			ResultSet res = stmt.executeQuery(str);
 			
-			
-			//out.print(result.getInt("auction_ID"));
-			//Make an HTML table to show the results in:
 		if(res.next()){
 			
-			ResultSet result=stmt.executeQuery(str);
+			ResultSet result=stmt.executeQuery(str);%>
 		
-			out.print("<form method='post' action='findandEditAuction.jsp'>");
-			out.print("<table>");
-			out.print("<tr><h3>Search Results</h3></tr>");
-
-			//make a row
-			out.print("<tr>");
-			//make a column
-			out.print("<td>");
-			out.print("Select");
-			out.print("</td>");
-			
-			
-			out.print("<td>");
-			//print out column header
-			out.print("Auction ID");
-			out.print("</td>");
-			//make a column
-			out.print("<td>");
-			out.print("Title");
-			out.print("</td>");
-			out.print("<td>");
-			out.print("Seller");
-			out.print("</td>");
-			out.print("<td>");
-			out.print("Item ID");
-			out.print("</td>");
-			
-			out.print("</tr>");
-			
-			out.print("<tr>");
-			
-			
-
-
-			//parse out the results
-			
+			<form method='post' action='findandEditAuction.jsp'>
+			<table>
+			<tr><h3>Search Results</h3></tr>
+			<tr><td>Select</td>
+			<td>Auction ID</td>
+			<td>Title</td>
+			<td>Seller</td>
+			<td>Item ID</td></tr>
+	<tr>
+<% 
 			while (result.next()) {
 				//make a row
 				
@@ -84,11 +74,11 @@
 				out.print("</td>");
 				
 				out.print("<td>");
-				out.print(result.getInt("Seller"));
+				out.print(result.getString("user_name"));
 				out.print("</td>");
 				
+			
 				
-				//int i=
 				out.print("<td>");
 				out.print(result.getInt("item_ID"));
 				out.print("</td>");
@@ -97,59 +87,40 @@
 				
 				out.print("</tr>");
 			}
-			out.print("</table><br>");
-			out.print("<table>");
-			out.print("<tr>");
+			out.print("</table><br><input type='hidden', name='field' value= "+field+
+					"><input type='hidden', name='val' value="+val+">");
 			
-			out.print("<input type='hidden', name='field' value="+field+">");
-			out.print("<input type='hidden', name='val' value="+val+">");
-			
-			out.print("<td><button type='submit' name='remove' value='remove'> Delete selected Auction </button>   ");
-			out.print("</td><td>");
-			out.print("<button type='submit' name='showbids' value='showbids'> Show and Edit bids for this Auction</button>");
-			
+	
 		
-			out.print("</td></tr>");
-			out.print("</table><table>");
-			//out.print("<tr>");
-			
-			//out.print("</td></tr>");
-			
-			out.print("<tr>");
 			
 			
-			out.print("<td>");
-			out.print("Select Field to Change: ");
-			out.print("<select name='changefield' size=1>"); 
-			out.print("<option value='title'>Title</option>");
-			out.print("<option value='description'>Description</option>");
-			out.print("<option value='end_date'>End date</option>");
-			out.print("<option value='min_price'> Minimum Price </option>");
-		out.print("</select><br>");
+%>
+<button type='submit' name='remove' value='remove'> Delete selected Auction </button>
+<button type='submit' name='showbids' value='showbids'> Show and Edit bids for this Auction</button><br><br>
+OR<br>
+Select Field to Change
+			<select name='changefield' size=1 id="mySelect"> 
+			<option value='title' id="title">Title</option>
+			<option value='description'id="description">Description</option>
+			<option value='end_date'  id="end" >End date</option>
+			<option value='min_price' id="min"> Minimum Price </option>
+		</select><br>
+<button type="button" onclick="myfunction()">Next</button>
+
+
+
+<p id="nextPart" style="display: none"> 
+Enter new value:
 			
+			<tr><input type='text' name='updated' id='updateval' pattern="" placeholder=""></tr>
 			
-			out.print("</td>");
-			
-			out.print("<td>");
-			
-			out.print("Enter new value:  ");
-			out.print("</td>");
-			out.print("<td>");
-			out.print("<input type='text' name='updated'>");
-			out.print("</td>");
-			out.print("<td>");
-			out.print("<br>");
-			out.print("<button type='submit' name='whatf'>");
-			out.print("Update");
-			out.print("</button>");
-			out.print("</td>");
-			out.print("</tr>");
-			
-			
-			//out.print("<input type='submit' value='submit'>");
-			out.print("</table>");
-			out.print("</form>");
-}else{
+			<br>
+			<tr><button type= 'submit' name='whatf'>Update</button></tr>
+
+</p>
+</form><% 
+		}
+			else{
 	out.print("<a href=CustomerRep.jsp> No auctions matching your search were found.  Please try again </a>");}
 
 			
