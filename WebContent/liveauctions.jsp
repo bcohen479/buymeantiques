@@ -14,6 +14,7 @@ There are a number of different links on this page that allow for different sear
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<!--BEN WROTE THIS CODE  -->
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Live Auctions</title>
 </head>

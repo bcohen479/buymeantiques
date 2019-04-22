@@ -13,7 +13,8 @@ This page shows the history of bids for any auction.
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Auction Profile</title>
-
+<!--OLIVER WROTE MOST OF THE CODE IN THIS FILE. 
+LEANNE WROTE THE BOTTOM PART DEALING WITH THE FORUM  -->
 <script type="text/javascript">
 
 function typeCheck() {

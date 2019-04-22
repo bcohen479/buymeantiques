@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!--LEANNE WROTE THIS CODE  -->
 <meta charset="ISO-8859-1">
 <title>logout</title>
 </head>

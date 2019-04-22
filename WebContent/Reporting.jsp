@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!--LEANNE WROTE THIS CODE  -->
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Generate Report | BuyMeAntiques</title>
 </head>

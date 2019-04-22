@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
     <%@ page import ="java.sql.*" %>
 <%
+/* WE ALL CONTRIBUTED TO THE CODE ON THIS FILE */
     String email = request.getParameter("emailaddress");   
     String fname = request.getParameter("fname");
     String lname=request.getParameter("lname");
