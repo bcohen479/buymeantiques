@@ -51,20 +51,28 @@
 		
 		if (rs.next()){
 			out.println("Item Exists");
+			out.println("Please return to the auction list your item will be waiting for you there and you can bid as much as you want.. ENJOY!..");
 			
 		} else {
-			out.println("Thanks! your intersted item has been saved and we will notify you when this item will be available again.");
+			out.println("Thanks! Your intersted item has been saved and we will notify you when this item will be available again.");
 		}
 		
 		//ps.executeUpdate();
 		
 		con.close();
 		
+		
+		
+		
+		
 	
 	}catch (Exception e) {
 		out.print("Error: "+ e);
 	}
 	%>
+	
+	
+	<td><a href="homepage.jsp">Home Page</a></td>
 
 </body>
 </html>
