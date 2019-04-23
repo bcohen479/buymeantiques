@@ -14,7 +14,7 @@
 <body>
 <br>
 <h2>Hello <%=session.getAttribute("userName") %> Here You Can Create Alerts for any item you want</h2>
-<h3>Please enter Manufacturer, Name and color</h3>
+<h3>Please enter Name, Manufacturer and color</h3>
 
 
 
@@ -23,31 +23,19 @@
       <h1>Set an Alert</h1>
       <form method="post" action="postAlert.jsp">
       
-      <p>Category:</p>
-		<select name="category">
-			<option value="Tables">Tables</option>
-			<option value="Jewelry">Jewelry</option>
-			<option value="Chairs">Chairs</option>
-		</select>
-        
+       
      
+       <p><label for="name"> Name </label></p>
+        <p><input id="name" type="text" name="name" value=""></p>
      
-     
-       <p><label for="Name" class="register_labels"> Name </label></p>
-        <p><input id="Name" type="text" name="stone" value=""></p>
-     
-    	 <p><label for="color" class="register_labels"> Color </label></p>
+    	 <p><label for="color"> Color </label></p>
         <p><input id="color" type="text" name="color" value=""></p>
      
-     	<p><label for="Style" class="register_labels">Style</label></p>
-        <p><input id="Style" type="text" name="Style" value="" ></p>
      
-        <p><label for="Manufacturer" class="register_labels"> Manufacturer </label></p>
-        <p><input id="Manufacturer" type="text" name="Manufacturer" value=""></p>
+        <p><label for="manufacturer"> Manufacturer </label></p>
+        <p><input id="manufacturer" type="text" name="manufacturer" value=""></p>
 
         
-
-
         
         <p class="submit"><input type="submit" value="Set Alert"></p>
       </form>
