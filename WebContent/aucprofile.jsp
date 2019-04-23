@@ -129,7 +129,7 @@ function typeCheck() {
 	<tr><td><a href="homepage.jsp">Back to home</a></td></tr>
 	</table>
 	
-	Forum<br><br>
+	<h3>Forum</h3><br><br>
 	<table>
 	<tr>
 <td>User</td>
@@ -142,16 +142,17 @@ function typeCheck() {
 		
 		String q="SELECT Users.user_name, Question, Q_id, Answer FROM Questions JOIN Users ON Questions.Asker=Users.User_ID WHERE Questions.Auction_ID= "+aucID;
 		ResultSet R=stmt.executeQuery(q);
-		
+		out.print("<form method=post, action=\"postResponse.jsp\">");
 		while(R.next()){
 		int qid=R.getInt("Q_id");
 		String a="";
-		if(R.getString("Answer")!=null){
+		if(R.getString("Answer")!=null&& R.getString("Answer").equals("")==false){
 			a=R.getString("Answer");
 		}else{
 			if(session.getAttribute("status").equals("customrep")){
-				a="<form method=post, action=postResponse.jsp>"+
-			"<input type=text, name=ans>"+"<input type=\"hidden\", name=\"qid\", value="+qid+"> <input type=\"submit\", value=\"Post Answer!\">";
+				a="<input type=text, name=ans required>"+"<input type=\"hidden\", name=\"qid\", value="+qid+
+			"> <input type=\"hidden\", name=\"aid\", value="+aucID+
+			"><input type=\"submit\" name=\"action\" value=\"Post Answer!\">";
 			}
 		}
 		
@@ -160,8 +161,16 @@ function typeCheck() {
 	
 		out.print(R.getString("Users.user_name"));
 		out.print("<td>"+R.getString("Question")+"</td><td>");
-		out.print(a+"</td></tr>");	
+		out.print(a+"</td>");
+		if(session.getAttribute("status").equals("customrep")){
+			out.print("<td><input type=\"checkbox\" name=\"delete[]\" value="+
+		qid+"></td>");
+		}
+		out.print("</tr>");
 	 }
+		if(session.getAttribute("status").equals("customrep")){
+		out.print("<tr><td><input type=\"hidden\", name=\"aid\", value="+ aucID  +"><input type=\"submit\" name=\"action\" value=\"Delete Selected Questions\"></tr></td></form>");
+		}
 		%>
 	
 	
@@ -170,7 +179,7 @@ function typeCheck() {
 	<br>
 	<form method=post, action="askQuestion.jsp">
 	 Post Question <input type="text" name="q"> 
-	 <input type="hidden" name="auctionID" value=<%=aucID %> display>
+	 <input type="hidden" name="auctionID" value=<%=aucID %>>
 	<input type="submit" value="submit">
 	</form>
 	

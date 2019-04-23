@@ -39,8 +39,8 @@
 	ps.setInt(4,aucID);
 	
 	ps.executeUpdate();
-	out.print("<a href= homepage.jsp>Go home</a>");
-}
+	out.print("<a href='aucprofile.jsp?value="+aucID+
+			"'>Go Back</a>");}
 
 catch(Exception e) {
 	out.print("Error: "+ e);

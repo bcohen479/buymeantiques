@@ -97,7 +97,7 @@ function ReportType() {
 </tr>
 
 <tr>
-		<td>Fields to include in report:</td>
+		<td>Fields to include in report (MUST CHECK AT LEAST ONE):</td>
 		<td>
 		<input type="checkbox" name="exField[]" value="sum(Complete_Auction.price) AS Earnings"> Earnings<br>
   		<input type="checkbox" name="exField[]" value="AVG(Complete_Auction.price) AS Average"> Average Price Per Sale<br>

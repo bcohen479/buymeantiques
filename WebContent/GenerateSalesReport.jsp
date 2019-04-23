@@ -61,12 +61,12 @@
 				//make a row
 				out.print("<tr>");
 				//make a column
-				out.print("<td>");
+				out.print("<td><h4>");
 				//print out column header
 				out.print(n);
-				out.print("</td>");
+				out.print("</h4></td>");
 				//make a column
-				out.print("<td>"+Atrim+"</td>");
+				out.print("<td><h4>"+Atrim+"</h4></td>");
 				out.print("</tr>");
 
 				//parse out the results
@@ -100,7 +100,9 @@
 			
 				//Get the extra things to select
 				String[]extra=request.getParameterValues("exField[]");
-			
+				if(extra==null){
+					out.print("No fields were selected<br>");
+				}else{
 				String af="";
 				List<String>aliases= new ArrayList<String>();
 				if(!n.equals("Items.Item_ID")){
@@ -145,9 +147,9 @@
 		out.print("<tr>");
 		ListIterator litr=aliases.listIterator();
 		while(litr.hasNext()){
-			out.print("<td>");
+			out.print("<td><h4>");
 			out.print(litr.next());
-			out.print("</td>");
+			out.print("</h4></td>");
 		    }
 		
 		
@@ -165,13 +167,15 @@
 			out.print("</tr>");
 
 		}
-		out.print("</table>");
-		out.print("TOTAL");
+		
+		
 			if(request.getParameter("TotalEarnings")!=null){
 				String s="SELECT "+af.substring(1)+" FROM Complete_Auction";
-				System.out.println(s);
+				//System.out.println(s);
 				result = stmt.executeQuery(s);
-				out.print("<table><tr>");
+				out.print("<br><tr><td><strong>");
+				out.print("Total for BuyMeAntiques");
+				out.print("</strong></td>");
 				while(result.next()){
 					litr=aliases.listIterator();
 					litr.next();
@@ -182,9 +186,10 @@
 						out.print("</td>");
 					    }
 				}
+				out.print("</tr>");
 			}
 				
-				
+			out.print("</table>");	
 			}	
 				
 				//end paren for earningsPer
@@ -192,7 +197,7 @@
 			
 			con.close();
 			//Make an HTML table to show the results in:
-				
+			}
 		
 		}catch (Exception e) {
 			out.print("Error: "+ e);

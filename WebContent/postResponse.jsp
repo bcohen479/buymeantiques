@@ -13,14 +13,19 @@
 <% 
 
 ApplicationDB db = new ApplicationDB();	
-Connection con = db.getConnection();	
+Connection con = db.getConnection();
+String act=request.getParameter("action");
+
+
+if(act.equals("Post Answer!")){
 String ans = request.getParameter("ans");   
 int crid= (Integer) session.getAttribute("userID");
-String qid=request.getParameter("qid");
 
 
-int q_id=Integer.parseInt(qid);
 
+
+	String qid=request.getParameter("qid");
+	int q_id=Integer.parseInt(qid);
 Statement stmt = con.createStatement();
 
 	PreparedStatement ps= con.prepareStatement("UPDATE Questions Set Answer=?, CR=? where Q_ID= ?");
@@ -28,8 +33,30 @@ Statement stmt = con.createStatement();
 	ps.setInt(2, crid);
 	ps.setInt(3,q_id);
 	ps.executeUpdate();
-	out.print("<a href=homepage.jsp>Success!!</a>");
 
+	out.print("<a href='aucprofile.jsp?value="+request.getParameter("aid")+
+			"'>Go Back</a>");
+}
+else{
+	if(request.getParameterValues("delete[]")!=null){
+		String[]q=request.getParameterValues("delete[]");
+	String clause="(";
+	for(int i=0; i<q.length; i++){
+		clause+=q[i]+",";
+	}
+		clause=clause.substring(0,clause.length()-1)+")";
+	//out.print(clause);
+
+	PreparedStatement p=con.prepareStatement("Delete From Questions WHERE Q_ID IN"+clause);
+	//out.print("<a href=\"homepage.jsp\">Question Deleted</a>");
+	p.executeUpdate();
+	out.print("<a href='aucprofile.jsp?value="+request.getParameter("aid")+
+		"'>Go Back</a>");
+	}
+	else{
+		out.print("You gave me nothing to delete!");
+	}
+}
 %>
 </body>
 </html>
