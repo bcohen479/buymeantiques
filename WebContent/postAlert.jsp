@@ -27,24 +27,36 @@
 		
 		int user = Integer.parseInt(session.getAttribute("userID").toString());
 		
-		String category = request.getParameter("category");
-		String name = request.getParameter("Name");
-		String color = request.getParameter("Color");
-		String style = request.getParameter("Style");
-		String manufacturer = request.getParameter("Manufacturer");
-
-		String inserQuery = "INSERT INTO Emails (from, datetime, to, content, subject, eid) VALUES (?,?);";
+		String category = request.getParameter("Category");
+		String name = request.getParameter("name");
+		String color = request.getParameter("color");
+		String style = request.getParameter("style");
+		String manufacturer = request.getParameter("manufacturer");
 		
-		PreparedStatement ps = con.prepareStatement(inserQuery);
-		ps.setInt(1, user);
+		System.out.println(color);
+
+		String inserQuery = "SELECT * FROM Items WHERE manufacturer = '" + manufacturer + "' AND color = '" + color + "' AND style = '" + style + "';";
+		Statement stmt1 = con.createStatement();
+		
+		ResultSet rs = stmt1.executeQuery(inserQuery);
+		
+		/* ps.setInt(1, user);
 		ps.setString(2, "you have an alert for new item");
 		ps.setString(2, category);
 		ps.setString(3, name);
 		ps.setString(4, color);
 		ps.setString(5, style);
-		ps.setString(6, manufacturer);
+		ps.setString(6, manufacturer); */
+
 		
-		ps.executeUpdate();
+		if (rs.next()){
+			out.println("Item Exists");
+			
+		} else {
+			out.println("Thanks! your intersted item has been saved and we will notify you when this item will be available again.");
+		}
+		
+		//ps.executeUpdate();
 		
 		con.close();
 		
