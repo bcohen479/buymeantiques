@@ -15,9 +15,7 @@
 <body>
 <br>
 <h2>Alerts for <%=session.getAttribute("userName") %></h2>
-<table>
-
-	</table>
+<a href="createAlert.jsp">Create Alert</a>
 	<br>
 
 	<table cellspacing="10">
@@ -27,8 +25,6 @@
 	</tr>
 	<tr>
 	</tr>
-	
-	<td><a href="createAlert.jsp">Create Alert</a></td>
 	
 	
 	
