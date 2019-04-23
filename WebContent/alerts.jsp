@@ -24,7 +24,6 @@
 	<tr>
 		<td>Alert Name</td>
 		<td>Auction ID</td>
-		<td>Date</td>
 	</tr>
 	<tr>
 	</tr>
@@ -57,7 +56,6 @@
 <%-- 			<td><%=date %></td>
  --%>
 		
-		</table>
 		<% }
 		res.close();
 		stmt.close();
@@ -65,5 +63,6 @@
 		out.print("Error: "+ e);
 	}
 	%>
+			</table>
 </body>
 </html>
