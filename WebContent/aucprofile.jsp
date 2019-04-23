@@ -171,6 +171,7 @@ function typeCheck() {
 		if(session.getAttribute("status").equals("customrep")){
 		out.print("<tr><td><input type=\"hidden\", name=\"aid\", value="+ aucID  +"><input type=\"submit\" name=\"action\" value=\"Delete Selected Questions\"></tr></td></form>");
 		}
+		out.print("</form>");
 		%>
 	
 	

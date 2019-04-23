@@ -27,6 +27,11 @@
 	</tr>
 	<tr>
 	</tr>
+	
+	<td><a href="createAlert.jsp">Create Alert</a></td>
+	
+	
+	
 <%
 	System.out.println(session.getAttribute("userID"));
 	List<String> list = new ArrayList<String>();
