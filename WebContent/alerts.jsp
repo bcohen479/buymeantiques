@@ -65,5 +65,8 @@
 	}
 	%>
 			</table>
+			
+			<br>
+			<td><a href="homepage.jsp">Home Page</a></td>
 </body>
 </html>
