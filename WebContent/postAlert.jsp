@@ -27,33 +27,27 @@
 		
 		int user = Integer.parseInt(session.getAttribute("userID").toString());
 		
-		String category = request.getParameter("Category");
+		
 		String name = request.getParameter("name");
 		String color = request.getParameter("color");
-		String style = request.getParameter("style");
 		String manufacturer = request.getParameter("manufacturer");
 		
 		System.out.println(color);
+		System.out.println(name);
+		System.out.println(manufacturer);
 
-		String inserQuery = "SELECT * FROM Items WHERE manufacturer = '" + manufacturer + "' AND color = '" + color + "' AND style = '" + style + "';";
+		String inserQuery = "SELECT manufacturer,color,name FROM Items WHERE manufacturer = '" + manufacturer + "' AND color = '" + color + "' AND name = '" + name + "';";
 		Statement stmt1 = con.createStatement();
 		
 		ResultSet rs = stmt1.executeQuery(inserQuery);
 		
-		/* ps.setInt(1, user);
-		ps.setString(2, "you have an alert for new item");
-		ps.setString(2, category);
-		ps.setString(3, name);
-		ps.setString(4, color);
-		ps.setString(5, style);
-		ps.setString(6, manufacturer); */
-
 		
-		if (rs.next()){
+		if (rs.isBeforeFirst()){
 			out.println("Item Exists");
 			out.println("Please return to the auction list your item will be waiting for you there and you can bid as much as you want.. ENJOY!..");
 			
 		} else {
+			
 			out.println("Thanks! Your intersted item has been saved and we will notify you when this item will be available again.");
 		}
 		
